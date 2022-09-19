@@ -4,6 +4,7 @@ import fsPromises from 'fs/promises';
 import path from 'path';
 import Head from 'next/head';
 import RecordFile from '../components/RecordFile';
+import Header from '../components/Header';
 export async function getStaticProps() {
   const filePath = path.join(process.cwd(), 'data-dummy.json');
   const jsonData = await fsPromises.readFile(filePath);
@@ -22,22 +23,28 @@ export default function Home(props) {
       <Head>
         <title>RecordBag</title>
       </Head>
+
       <section>
-        <ul>
+        <RecordList>
           {dummyFiles.map((file) => (
             <RecordFile
               key={file.CatalogId}
               artist={file.Artist}
               title={file.Title}
               label={file.Label}
-              Format={file.Format}
+              format={file.Format}
               released={file.Released}
               condition={file['Collection Media Condition']}
               cover={file.Cover}
             />
           ))}
-        </ul>
+        </RecordList>
       </section>
     </>
   );
 }
+
+const RecordList = styled.ul`
+  margin: 0;
+  list-style: none;
+`;

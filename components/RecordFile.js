@@ -12,22 +12,40 @@ export default function RecordFile({
   return (
     <Record>
       <Cover src={cover} />
-      <p>{artist}</p>
-      <p>{title}</p>
-      <p>{label}</p>
-      <p>{released}</p>
-      <p>{format}</p>
-      <p>{condition}</p>
+      <div>
+        <Artist>
+          <strong>{artist}</strong>
+        </Artist>
+        <p>
+          <em>
+            <strong>{title}</strong>
+          </em>
+          , {released}
+        </p>
+        <p>{label}</p>
+        <p>{format}</p>
+        <p>{condition}</p>
+      </div>
     </Record>
   );
 }
 
 const Record = styled.li`
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 0 4px 0;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  gap: 1rem;
+  margin: 1rem;
+  padding: 1rem;
+  box-shadow: 0px 0px 30px 10px rgba(51, 51, 51, 0.1);
+  border-radius: 5px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.7rem;
 `;
 
 const Cover = styled.img`
-  width: 50px;
+  width: 70px;
+`;
+
+const Artist = styled.p`
+  font-weight: 500;
 `;

@@ -7,12 +7,13 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
     }
 
-    body {
-        background-color: white;
+    html {
+      margin: 0;
     }
 
-    h1 {
-
+    body {
+        background-color: white;
+        margin: 0;
     }
 `;
 

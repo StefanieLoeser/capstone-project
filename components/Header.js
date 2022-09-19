@@ -15,8 +15,10 @@ const Head = styled.header`
   color: white;
   font-family: 'Open Sans', sans-serif;
   font-weight: bold;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: sticky;
+  margin: 0;
 `;
