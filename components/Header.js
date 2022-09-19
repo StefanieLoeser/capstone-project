@@ -13,7 +13,7 @@ const Head = styled.header`
   width: 100%;
   height: 48px;
   color: white;
-  font-family: Helvetica, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: bold;
   font-size: 0.7rem;
   display: flex;
