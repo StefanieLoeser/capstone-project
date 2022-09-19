@@ -1,11 +1,8 @@
 import styled from 'styled-components';
+import Header from '../components/Header';
 
 export default function Home() {
-  return (
-    <div>
-      <Button>Click Me!</Button>
-    </div>
-  );
+  return;
 }
 
 const Button = styled.button`
