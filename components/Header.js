@@ -22,4 +22,5 @@ const Heading = styled.header`
   position: fixed;
   top: 0;
   margin: 0;
+  z-index: 1;
 `;
