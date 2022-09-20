@@ -2,13 +2,13 @@ import styled from 'styled-components';
 
 export default function Header() {
   return (
-    <Head>
+    <Heading>
       <h1>RecordCollection</h1>
-    </Head>
+    </Heading>
   );
 }
 
-const Head = styled.header`
+const Heading = styled.header`
   background-color: #333333;
   width: 100%;
   height: 48px;
@@ -20,5 +20,6 @@ const Head = styled.header`
   justify-content: center;
   align-items: center;
   position: fixed;
+  top: 0;
   margin: 0;
 `;

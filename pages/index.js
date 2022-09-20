@@ -24,7 +24,7 @@ export default function Home(props) {
         <title>RecordBag</title>
       </Head>
 
-      <main>
+      <Main>
         <RecordList>
           {dummyFiles.map((file) => (
             <RecordFile
@@ -39,11 +39,16 @@ export default function Home(props) {
             />
           ))}
         </RecordList>
-      </main>
+      </Main>
     </>
   );
 }
 
 const RecordList = styled.ul`
   list-style: none;
+`;
+
+const Main = styled.main`
+  position: absolute;
+  top: 3rem;
 `;

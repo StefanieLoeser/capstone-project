@@ -32,10 +32,11 @@ export default function RecordFile({
 
 const Record = styled.li`
   display: grid;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 25% 75%;
   gap: 1rem;
   margin: 1rem;
   padding: 1rem;
+  width: 95%;
   box-shadow: 0px 0px 30px 10px rgba(51, 51, 51, 0.1);
   border-radius: 5px;
   font-family: 'Open Sans', sans-serif;
