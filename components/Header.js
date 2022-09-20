@@ -19,6 +19,6 @@ const Head = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: sticky;
+  position: fixed;
   margin: 0;
 `;

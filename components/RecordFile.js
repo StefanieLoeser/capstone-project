@@ -13,9 +13,9 @@ export default function RecordFile({
     <Record>
       <Cover src={cover} />
       <div>
-        <Artist>
+        <p>
           <strong>{artist}</strong>
-        </Artist>
+        </p>
         <p>
           <em>
             <strong>{title}</strong>
@@ -44,8 +44,4 @@ const Record = styled.li`
 
 const Cover = styled.img`
   width: 70px;
-`;
-
-const Artist = styled.p`
-  font-weight: 500;
 `;

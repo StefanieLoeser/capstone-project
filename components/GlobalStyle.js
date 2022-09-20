@@ -7,14 +7,6 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
     }
 
-    html {
-      margin: 0;
-    }
-
-    body {
-        background-color: white;
-        margin: 0;
-    }
 `;
 
 export default GlobalStyle;
