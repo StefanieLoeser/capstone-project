@@ -1,14 +1,22 @@
 import styled from 'styled-components';
+import Head from 'next/head';
+import RecordFile from '../components/RecordFile';
 
 import fsPromises from 'fs/promises';
 import path from 'path';
-import Head from 'next/head';
-import RecordFile from '../components/RecordFile';
 
 export async function getStaticProps() {
   const filePath = path.join(process.cwd(), 'data-dummy.json');
   const jsonData = await fsPromises.readFile(filePath);
   const objectData = JSON.parse(jsonData);
+
+  // export const getStaticProps = async () => {
+  //   return {
+  //     props: {
+  //       playlistLists: playlist,
+  //     },
+  //   };
+  // };
 
   return {
     props: objectData,
