@@ -1,16 +1,11 @@
-import { createGlobalStyle } from 'styled-componenents';
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-
-*, *::after, *::before {
-  box-sizing: border-box;
-}
-
-body {
-    background-color: hotpink;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
+    *, *::after, *::before {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
 `;
 
 export default GlobalStyle;
