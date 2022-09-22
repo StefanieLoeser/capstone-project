@@ -18,16 +18,22 @@ export async function getStaticProps() {
 export default function Home(props) {
   const collection = props.collection;
 
-  const [selected, setSelected] = useState([]);
+  const myCollection = collection.map((file) => {
+    return { ...file, isChecked: false };
+  });
 
-  const [isChecked, setIsChecked] = useState(false);
+  const [collectionState, setCollectionState] = useState(myCollection);
 
-  const handleOnChange = () => {
-    setSelected([...]);
-  };
-
-  // console.log(collection);
-  console.log(isChecked);
+  function handleChange(id) {
+    const updatedCollection = collectionState.map((file) => {
+      if (file.CatalogId === id) {
+        file.isChecked = !file.isChecked;
+      }
+      return file;
+    });
+    setCollectionState(updatedCollection);
+    console.log(collectionState);
+  }
 
   return (
     <>
@@ -37,7 +43,7 @@ export default function Home(props) {
 
       <Main>
         <RecordList>
-          {collection.map((file) => (
+          {collectionState.map((file) => (
             <RecordFile
               key={file.CatalogId}
               id={file.CatalogId}
@@ -48,8 +54,8 @@ export default function Home(props) {
               released={file.Released}
               condition={file['Collection Media Condition']}
               cover={file.Cover}
-              // checked={isChecked}
-              onChange={handleOnChange}
+              checked={file.isChecked}
+              onHandleChange={handleChange}
             />
           ))}
         </RecordList>

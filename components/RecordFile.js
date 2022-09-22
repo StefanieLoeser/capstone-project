@@ -8,19 +8,28 @@ export default function RecordFile({
   format,
   condition,
   cover,
-  //   isChecked,
-  onChange,
+  checked,
+  onHandleChange,
   id,
 }) {
+  // export function selectedRecord
 
-export function selectedRecord 
+  // () => onHandleChange(id)
 
+  function testfunction() {
+    onHandleChange(id);
+    console.log(checked);
+  }
 
   return (
     <Record>
       <Cover src={cover} />
       <div>
-        <BookmarkIcon type="checkbox" onClick={() => onChange(id)} />
+        <BookmarkIcon
+          checked={checked}
+          type="checkbox"
+          onChange={testfunction}
+        />
         <p>
           <strong>{artist}</strong>
         </p>
@@ -40,6 +49,7 @@ export function selectedRecord
 
 const Record = styled.li`
   display: grid;
+  position: relative;
   grid-template-columns: 25% 75%;
   gap: 1rem;
   margin: 1rem;
