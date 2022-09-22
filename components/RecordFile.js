@@ -1,47 +1,30 @@
 import styled from 'styled-components';
 
-export default function RecordFile({
-  artist,
-  title,
-  label,
-  released,
-  format,
-  condition,
-  cover,
-  checked,
-  onHandleChange,
-  id,
-}) {
-  // export function selectedRecord
-
-  // () => onHandleChange(id)
-
-  function testfunction() {
-    onHandleChange(id);
-    console.log(checked);
+export default function RecordFile({ record, onHandleChange }) {
+  function changeHandler() {
+    onHandleChange(record.CatalogId);
   }
-
   return (
     <Record>
-      <Cover src={cover} />
+      <Cover src={record.Cover} />
       <div>
         <BookmarkIcon
-          checked={checked}
+          checked={record.isChecked}
           type="checkbox"
-          onChange={testfunction}
+          onChange={changeHandler}
         />
         <p>
-          <strong>{artist}</strong>
+          <strong>{record.Artist}</strong>
         </p>
         <p>
           <em>
-            <strong>{title}</strong>
+            <strong>{record.Title}</strong>
           </em>
-          , {released}
+          , {record.Released}
         </p>
-        <p>{label}</p>
-        <p>{format}</p>
-        <p>{condition}</p>
+        <p>{record.Label}</p>
+        <p>{record.Format}</p>
+        <p>{record['Collection Media Condition']}</p>
       </div>
     </Record>
   );
@@ -67,8 +50,8 @@ const Cover = styled.img`
 
 const BookmarkIcon = styled.input`
   position: absolute;
-  top: 22px;
-  right: 10px;
+  top: 1rem;
+  right: 1rem;
 `;
 
 {

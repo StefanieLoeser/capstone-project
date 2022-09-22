@@ -32,7 +32,6 @@ export default function Home(props) {
       return file;
     });
     setCollectionState(updatedCollection);
-    console.log(collectionState);
   }
 
   return (
@@ -46,15 +45,7 @@ export default function Home(props) {
           {collectionState.map((file) => (
             <RecordFile
               key={file.CatalogId}
-              id={file.CatalogId}
-              artist={file.Artist}
-              title={file.Title}
-              label={file.Label}
-              format={file.Format}
-              released={file.Released}
-              condition={file['Collection Media Condition']}
-              cover={file.Cover}
-              checked={file.isChecked}
+              record={file}
               onHandleChange={handleChange}
             />
           ))}
