@@ -8,10 +8,10 @@ import { useState } from 'react';
 export async function getStaticProps() {
   const filePath = path.join(process.cwd(), './json/data-dummy.json');
   const jsonData = await fsPromises.readFile(filePath);
-  const objectData = JSON.parse(jsonData);
+  const collectionData = JSON.parse(jsonData);
 
   return {
-    props: objectData,
+    props: collectionData,
   };
 }
 
