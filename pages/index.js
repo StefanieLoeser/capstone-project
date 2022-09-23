@@ -40,26 +40,28 @@ export default function Home(props) {
         <title>RecordBag</title>
       </Head>
 
-      <Main>
-        <RecordList>
-          {collectionState.map((file) => (
-            <RecordFile
-              key={file.CatalogId}
-              record={file}
-              onHandleChange={handleChange}
-            />
-          ))}
-        </RecordList>
-      </Main>
+      {/* <Main> */}
+      <RecordList>
+        {collectionState.map((file) => (
+          <RecordFile
+            key={file.CatalogId}
+            record={file}
+            onHandleChange={handleChange}
+          />
+        ))}
+      </RecordList>
+      {/* </Main> */}
     </>
   );
 }
 
 const RecordList = styled.ul`
   list-style: none;
-`;
-
-const Main = styled.main`
   position: absolute;
   top: 3rem;
+  bottom: 3rem;
 `;
+
+// const Main = styled.main`
+
+// `;
