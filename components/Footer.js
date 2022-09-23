@@ -8,7 +8,7 @@ export default function Footer() {
         <Link href="/">
           <Navlinks>Collection</Navlinks>
         </Link>
-        <Link href="/recordbag.js">
+        <Link href="/recordbag">
           <Navlinks>RecordBag</Navlinks>
         </Link>
       </Navbar>
@@ -19,6 +19,7 @@ export default function Footer() {
 const Navlinks = styled.a`
   /* background-image: ; */
   color: white;
+  cursor: pointer;
 `;
 
 const Navbar = styled.nav`
