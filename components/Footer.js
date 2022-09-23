@@ -17,7 +17,6 @@ export default function Footer() {
 }
 
 const Navlinks = styled.a`
-  /* background-image: ; */
   color: white;
   cursor: pointer;
 `;

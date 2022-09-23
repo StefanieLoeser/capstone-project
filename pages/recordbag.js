@@ -1,19 +1,19 @@
 import styled from 'styled-components';
-// import RecordFile from '../components/RecordFile';
+import RecordFile from '../components/RecordFile';
 
-export default function RecordBag() {
+export default function RecordBag({ selection }) {
   return (
     <>
       <Section>
         <p>Here you will see all your selected records</p>
         <Selection>
-          {/* {selection.map((file) => {
+          {selection.map((file) => {
             <RecordFile
               key={file.CatalogId}
               record={file}
               onHandleChange={handleChange}
             />;
-          })} */}
+          })}
         </Selection>
       </Section>
     </>
