@@ -1,17 +1,13 @@
 import styled from 'styled-components';
 
 export default function RecordFile({ record, onHandleChange }) {
-  function changeHandler() {
-    onHandleChange(record.CatalogId);
-  }
   return (
     <Record>
       <Cover src={record.Cover} />
       <div>
         <BookmarkIcon
-          checked={record.isChecked}
           type="checkbox"
-          onChange={changeHandler}
+          onChange={() => onHandleChange(record.CatalogId)}
         />
         <p>
           <strong>{record.Artist}</strong>
