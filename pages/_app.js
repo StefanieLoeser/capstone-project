@@ -9,7 +9,20 @@ function MyApp({ Component, pageProps }) {
       return { ...file, isChecked: false };
     })
   );
-  console.log(collectionState[0], 'myApp');
+  const [selectionState, setSelectionState] = useState([]);
+
+  function handleChange(id) {
+    const updatedCollection = collectionState.map((file) => {
+      if (file.CatalogId === id) {
+        file.isChecked = !file.isChecked;
+      }
+      return file;
+    });
+    setCollectionState(updatedCollection);
+    setSelectionState(() =>
+      collectionState.filter((record) => record.isChecked)
+    );
+  }
 
   return (
     <>
@@ -19,6 +32,9 @@ function MyApp({ Component, pageProps }) {
           {...pageProps}
           collectionState={collectionState}
           onSetCollectionState={setCollectionState}
+          selectionState={selectionState}
+          onSetSelectionState={setSelectionState}
+          onHandleChange={handleChange}
         />
       </Layout>
     </>

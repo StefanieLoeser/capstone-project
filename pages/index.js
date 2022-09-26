@@ -2,18 +2,7 @@ import styled from 'styled-components';
 import Head from 'next/head';
 import RecordFile from '../components/RecordFile';
 
-export default function Home({ collectionState, onSetCollectionState }) {
-  function handleChange(id) {
-    console.log(id);
-    const updatedCollection = collectionState.map((file) => {
-      if (file.CatalogId === id) {
-        file.isChecked = !file.isChecked;
-      }
-      return file;
-    });
-    onSetCollectionState(updatedCollection);
-  }
-
+export default function Home({ collectionState, onHandleChange }) {
   return (
     <>
       <Head>
@@ -24,7 +13,7 @@ export default function Home({ collectionState, onSetCollectionState }) {
           <RecordFile
             key={file.CatalogId}
             record={file}
-            onHandleChange={handleChange}
+            onHandleChange={onHandleChange}
           />
         ))}
       </Collection>

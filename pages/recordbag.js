@@ -1,17 +1,8 @@
 import styled from 'styled-components';
 import RecordFile from '../components/RecordFile';
 
-export default function RecordBag({
-  collectionState,
-  // onSetCollectionState,
-  // handleChange,
-}) {
-  console.log(collectionState[0], 'recordbag');
-  const selection = collectionState.filter((record) => record.isChecked);
-  console.log(selection, 'SELECTION');
-  const handleChange = () => {
-    console.log('implement me');
-  };
+export default function RecordBag({ selectionState, onHandleChange }) {
+  const selection = selectionState;
 
   return (
     <>
@@ -22,7 +13,7 @@ export default function RecordBag({
             <RecordFile
               key={file.CatalogId}
               record={file}
-              onHandleChange={handleChange}
+              onHandleChange={onHandleChange}
             />
           ))}
         </Selection>
