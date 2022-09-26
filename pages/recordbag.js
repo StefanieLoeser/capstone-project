@@ -6,8 +6,11 @@ export default function RecordBag({ selectionState, onHandleChange }) {
 
   return (
     <>
+      <Heading>
+        <h1>RecordBag</h1>
+      </Heading>
       <Section>
-        <p>Your selected records:</p>
+        <Text>Your selected records:</Text>
         <Selection>
           {selection.map((file) => (
             <RecordFile
@@ -24,7 +27,7 @@ export default function RecordBag({ selectionState, onHandleChange }) {
 
 const Selection = styled.ul`
   list-style: none;
-  position: relative;
+  position: absolut;
   top: 3rem;
   bottom: 3rem;
 `;
@@ -32,4 +35,28 @@ const Selection = styled.ul`
 const Section = styled.section`
   position: relative;
   top: 4rem;
+`;
+
+const Text = styled.p`
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-align: center;
+`;
+
+const Heading = styled.header`
+  background-color: #333333;
+  width: 100%;
+  height: 48px;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  font-size: 0.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  margin: 0;
+  z-index: 1;
 `;
