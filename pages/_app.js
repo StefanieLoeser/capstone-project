@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }) {
     });
     setCollectionState(updatedCollection);
     setSelectionState(() =>
-      collectionState.filter((record) => record.isChecked)
+      updatedCollection.filter((record) => record.isChecked)
     );
   }
 
@@ -32,8 +32,8 @@ function MyApp({ Component, pageProps }) {
           {...pageProps}
           collectionState={collectionState}
           onSetCollectionState={setCollectionState}
-          selectionState={selectionState}
-          onSetSelectionState={setSelectionState}
+          selection={selectionState}
+          onSetSelection={setSelectionState}
           onHandleChange={handleChange}
         />
       </Layout>

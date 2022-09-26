@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 import RecordFile from '../components/RecordFile';
 
-export default function RecordBag({ selectionState, onHandleChange }) {
-  const selection = selectionState;
-
+export default function RecordBag({ selection, onHandleChange }) {
   return (
     <>
       <Heading>
@@ -27,14 +25,16 @@ export default function RecordBag({ selectionState, onHandleChange }) {
 
 const Selection = styled.ul`
   list-style: none;
-  position: absolut;
-  top: 3rem;
+  position: absolute;
+  top: 2rem;
   bottom: 3rem;
 `;
 
 const Section = styled.section`
+  display: grid;
   position: relative;
   top: 4rem;
+  bottom: 3rem;
 `;
 
 const Text = styled.p`
