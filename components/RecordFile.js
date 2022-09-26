@@ -6,7 +6,6 @@ export default function RecordFile({ record, onHandleChange }) {
       <Cover src={record.Cover} />
       <div>
         <BookmarkIcon
-          // checked={record.isChecked}
           type="checkbox"
           onChange={() => onHandleChange(record.CatalogId)}
         />
