@@ -1,19 +1,30 @@
 import styled from 'styled-components';
 import RecordFile from '../components/RecordFile';
 
-export default function RecordBag({ selection }) {
+export default function RecordBag({
+  collectionState,
+  // onSetCollectionState,
+  // handleChange,
+}) {
+  console.log(collectionState[0], 'recordbag');
+  const selection = collectionState.filter((record) => record.isChecked);
+  console.log(selection, 'SELECTION');
+  const handleChange = () => {
+    console.log('implement me');
+  };
+
   return (
     <>
       <Section>
-        <p>Here you will see all your selected records</p>
+        <p>Your selected records:</p>
         <Selection>
-          {selection.map((file) => {
+          {selection.map((file) => (
             <RecordFile
               key={file.CatalogId}
               record={file}
               onHandleChange={handleChange}
-            />;
-          })}
+            />
+          ))}
         </Selection>
       </Section>
     </>
