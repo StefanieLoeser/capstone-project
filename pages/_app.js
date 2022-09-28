@@ -1,6 +1,7 @@
 import GlobalStyle from '../components/GlobalStyle';
 import Layout from '../components/Layout';
 import { useState } from 'react';
+import useLocalStorage from '../hooks/useLocalStorage';
 import collection from '../json/data-dummy.json';
 
 function MyApp({ Component, pageProps }) {
@@ -9,7 +10,7 @@ function MyApp({ Component, pageProps }) {
       return { ...file, isChecked: false };
     })
   );
-  const [selectionState, setSelectionState] = useState([]);
+  const [selectionState, setSelectionState] = useLocalStorage('_selection', []);
 
   function handleChange(id) {
     const updatedCollection = collectionState.map((file) => {
