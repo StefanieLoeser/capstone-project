@@ -2,24 +2,28 @@ import styled from 'styled-components';
 import Head from 'next/head';
 import RecordFile from '../components/RecordFile';
 
-// This gets called on every request (Server-side Rendering):
 export async function getServerSideProps({ query }) {
-  // Authentication data in the discogs API:
-  // - Stored in the .env.local file in the development environment;
-  // - In "Environment Variables" settings on Vercel, in the production environment.
   const userToken = process.env.DISCOGS_USER_TOKEN;
   const userID = process.env.DISCOGS_USER_ID;
   const folderID = process.env.DISCOGS_FOLDER_ID;
-  // Query values (if they do not come via URL, they assume initial values):
-  // const sort = query.sort ? query.sort : 'artist';
-  // const order = query.order ? query.order : 'asc';
-  // const page = query.page ? query.page : '1';
-  // Fetch the data from the discogs API:
+
+  const sort = query.sort ? query.sort : 'added';
+  const order = query.order ? query.order : 'desc';
+  const page = query.page ? query.page : '1';
+
   const collectionItemsByFolderURL =
     'https://api.discogs.com/users/' +
     userID +
     '/collection/folders/' +
-    folderID;
+    folderID +
+    '/releases?sort=' +
+    sort +
+    '&sort_order=' +
+    order +
+    '&page=' +
+    page +
+    '&per_page=42';
+
   const init = {
     headers: {
       'User-Agent': 'MyRecordsPlaylistApp/1.0.0 +http://localhost:3000/',
@@ -28,14 +32,22 @@ export async function getServerSideProps({ query }) {
   };
   const res = await fetch(collectionItemsByFolderURL, init);
   const data = await res.json();
-  console.log(data);
-  // Pass data to the page via props:
-  return { props: { data, query } };
+  const myDiscogsCollection = data.releases.map((file) => {
+    return { ...file, isChecked: false };
+  });
+
+  return { props: { myDiscogsCollection, query } };
 }
 
-export default function Home({ collectionState, onHandleChange, props }) {
-  // const myDiscogsCollection = props.data;
-  // console.log(myDiscogsCollection);
+export default function Home({
+  collectionState,
+  onSetCollectionState,
+  onHandleChange,
+  myDiscogsCollection,
+}) {
+  console.log(myDiscogsCollection);
+
+  onSetCollectionState(myDiscogsCollection);
 
   return (
     <>

@@ -4,13 +4,13 @@ import useLocalStorage from '../hooks/useLocalStorage';
 import collection from '../json/data-dummy.json';
 
 function MyApp({ Component, pageProps }) {
-  const myCollection = collection.map((file) => {
-    return { ...file, isChecked: false };
-  });
+  // const myCollection = collection.map((file) => {
+  //   return { ...file, isChecked: false };
+  // });
 
   const [collectionState, setCollectionState] = useLocalStorage(
     '_collection',
-    myCollection
+    []
   );
 
   const [selectionState, setSelectionState] = useLocalStorage('_selection', []);
