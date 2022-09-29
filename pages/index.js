@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Head from 'next/head';
 import RecordFile from '../components/RecordFile';
+import { useEffect } from 'react';
 
 export async function getServerSideProps({ query }) {
   const userToken = process.env.DISCOGS_USER_TOKEN;
@@ -47,7 +48,9 @@ export default function Home({
 }) {
   console.log(myDiscogsCollection);
 
-  onSetCollectionState(myDiscogsCollection);
+  useEffect(() => {
+    return onSetCollectionState(myDiscogsCollection);
+  }, []);
 
   return (
     <>
@@ -61,7 +64,7 @@ export default function Home({
         <Collection>
           {collectionState.map((file) => (
             <RecordFile
-              key={file.CatalogId}
+              key={file.id}
               record={file}
               onHandleChange={onHandleChange}
             />

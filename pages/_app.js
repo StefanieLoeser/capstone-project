@@ -1,17 +1,22 @@
+// import { useState } from 'react';
 import GlobalStyle from '../components/GlobalStyle';
 import Layout from '../components/Layout';
 import useLocalStorage from '../hooks/useLocalStorage';
 import collection from '../json/data-dummy.json';
 
 function MyApp({ Component, pageProps }) {
-  // const myCollection = collection.map((file) => {
-  //   return { ...file, isChecked: false };
-  // });
+  const myCollection = collection.map((file) => {
+    return { ...file, isChecked: false };
+  });
 
-  const [collectionState, setCollectionState] = useLocalStorage(
-    '_collection',
-    []
-  );
+  const [collectionState, setCollectionState] = useLocalStorage('_collection', [
+    myCollection,
+  ]);
+
+  // const [collectionState, setCollectionState] = useState(
+  //   '_collection',
+  //   []
+  // );
 
   const [selectionState, setSelectionState] = useLocalStorage('_selection', []);
 

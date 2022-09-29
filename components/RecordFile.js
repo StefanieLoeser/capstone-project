@@ -3,25 +3,25 @@ import styled from 'styled-components';
 export default function RecordFile({ record, onHandleChange }) {
   return (
     <Record>
-      <Cover src={record.Cover} />
+      <Cover src={record.basic_information.cover_image} />
       <div>
         <BookmarkIcon
           type="checkbox"
           checked={record.isChecked}
-          onChange={() => onHandleChange(record.CatalogId)}
+          onChange={() => onHandleChange(record.id)}
         />
         <p>
-          <strong>{record.Artist}</strong>
+          <strong>{record.basic_information.artists.name}</strong>
         </p>
         <p>
           <em>
-            <strong>{record.Title}</strong>
+            <strong>{record.basic_information.title}</strong>
           </em>
-          , {record.Released}
+          , {record.basic_information.year}
         </p>
-        <p>{record.Label}</p>
+        {/* <p>{record.labels}</p>
         <p>{record.Format}</p>
-        <p>{record['Collection Media Condition']}</p>
+        <p>{record['Collection Media Condition']}</p> */}
       </div>
     </Record>
   );
