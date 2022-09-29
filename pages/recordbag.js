@@ -26,15 +26,14 @@ export default function RecordBag({ selection, onHandleChange }) {
 const Selection = styled.ul`
   list-style: none;
   position: absolute;
-  top: 2rem;
-  bottom: 3rem;
+  padding: 3rem 1rem;
 `;
 
 const Section = styled.section`
-  display: grid;
   position: relative;
-  top: 4rem;
-  bottom: 3rem;
+  display: flexbox;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const Text = styled.p`

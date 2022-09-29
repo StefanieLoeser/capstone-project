@@ -2,7 +2,41 @@ import styled from 'styled-components';
 import Head from 'next/head';
 import RecordFile from '../components/RecordFile';
 
-export default function Home({ collectionState, onHandleChange }) {
+// This gets called on every request (Server-side Rendering):
+export async function getServerSideProps({ query }) {
+  // Authentication data in the discogs API:
+  // - Stored in the .env.local file in the development environment;
+  // - In "Environment Variables" settings on Vercel, in the production environment.
+  const userToken = process.env.DISCOGS_USER_TOKEN;
+  const userID = process.env.DISCOGS_USER_ID;
+  const folderID = process.env.DISCOGS_FOLDER_ID;
+  // Query values (if they do not come via URL, they assume initial values):
+  // const sort = query.sort ? query.sort : 'artist';
+  // const order = query.order ? query.order : 'asc';
+  // const page = query.page ? query.page : '1';
+  // Fetch the data from the discogs API:
+  const collectionItemsByFolderURL =
+    'https://api.discogs.com/users/' +
+    userID +
+    '/collection/folders/' +
+    folderID;
+  const init = {
+    headers: {
+      'User-Agent': 'MyRecordsPlaylistApp/1.0.0 +http://localhost:3000/',
+      Authorization: 'Discogs token=' + userToken,
+    },
+  };
+  const res = await fetch(collectionItemsByFolderURL, init);
+  const data = await res.json();
+  console.log(data);
+  // Pass data to the page via props:
+  return { props: { data, query } };
+}
+
+export default function Home({ collectionState, onHandleChange, props }) {
+  // const myDiscogsCollection = props.data;
+  // console.log(myDiscogsCollection);
+
   return (
     <>
       <Head>
@@ -11,15 +45,17 @@ export default function Home({ collectionState, onHandleChange }) {
       <Heading>
         <h1>RecordCollection</h1>
       </Heading>
-      <Collection>
-        {collectionState.map((file) => (
-          <RecordFile
-            key={file.CatalogId}
-            record={file}
-            onHandleChange={onHandleChange}
-          />
-        ))}
-      </Collection>
+      <Section>
+        <Collection>
+          {collectionState.map((file) => (
+            <RecordFile
+              key={file.CatalogId}
+              record={file}
+              onHandleChange={onHandleChange}
+            />
+          ))}
+        </Collection>
+      </Section>
     </>
   );
 }
@@ -27,8 +63,14 @@ export default function Home({ collectionState, onHandleChange }) {
 const Collection = styled.ul`
   list-style: none;
   position: absolute;
-  top: 3rem;
-  bottom: 3rem;
+  padding: 3rem 1rem;
+`;
+
+const Section = styled.section`
+  position: relative;
+  display: flexbox;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const Heading = styled.header`
