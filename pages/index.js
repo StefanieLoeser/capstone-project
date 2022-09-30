@@ -23,7 +23,7 @@ export async function getServerSideProps({ query }) {
     order +
     '&page=' +
     page +
-    '&per_page=100';
+    '&per_page=50';
 
   const init = {
     headers: {
@@ -33,11 +33,10 @@ export async function getServerSideProps({ query }) {
   };
   const res = await fetch(collectionItemsByFolderURL, init);
   const data = await res.json();
-  const myDiscogsCollection = data.releases;
 
-  // const myDiscogsCollection = data.releases.map((file) => {
-  //   return { ...file, isChecked: false };
-  // });
+  const myDiscogsCollection = data.releases.map((file) => {
+    return { ...file, isChecked: false };
+  });
 
   return { props: { myDiscogsCollection, query } };
 }
@@ -51,11 +50,9 @@ export default function Home({
   console.log(myDiscogsCollection);
 
   useEffect(() => {
-    return onSetCollectionState(() => {
-      myDiscogsCollection.map((file) => {
-        return { ...file, isChecked: false };
-      });
-    });
+    if (collectionState.length === 0) {
+      return onSetCollectionState(myDiscogsCollection);
+    }
   }, []);
 
   return (

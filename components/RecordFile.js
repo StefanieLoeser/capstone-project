@@ -1,9 +1,27 @@
 import styled from 'styled-components';
+// import { MdOutlineExpandMore } from 'react-icons';
+// import { MdExpandLess } from 'react-icons';
+// import { useState } from 'react';
 
 export default function RecordFile({ record, onChange }) {
+  // const releaseApiUrl = record.basic_information?.resource_url;
+
+  // async function getServerSideProps() {
+  //   const res = await fetch(releaseApiUrl);
+  //   const data = await res.json();
+
+  //   return { props: { data } };
+  // }
+  // console.log(data);
+
+  // const [showTracks, setShowTracks] = useState(false);
+  // function toggle() {
+  //   setShowTracks(!showTracks);
+  // }
+
   return (
     <Record>
-      <Cover src={record.basic_information?.cover_image} />
+      <Cover src={record.basic_information?.thumb} />
       <div>
         <BookmarkIcon
           type="checkbox"
@@ -11,22 +29,32 @@ export default function RecordFile({ record, onChange }) {
           onChange={() => onChange(record.id)}
         />
         <RecordDetails>
-          <li>
+          <li key={record.id}>
             <strong>{record.basic_information?.artists[0].name}</strong>
           </li>
-          <li>
+          <li key={record.id}>
             <em>
               <strong>{record.basic_information?.title}</strong>
             </em>
             , {record.basic_information?.year}
           </li>
-          <li>{record.basic_information?.labels[0].name}</li>
+          <li key={record.id}>{record.basic_information?.labels[0].name}</li>
           {/* <li>{record.Format}</li> */}
           {/* <li>{record.notes[0].value}</li> */}
         </RecordDetails>
-      </div>
-      <div>
-        <p></p>
+        {/* <TrackInformation style={{ display: showTracks ? 'block' : 'none' }}>
+          <li>A1 Testtrack (04:32 min)</li>
+          {/* {data.tracklist?.map((track) => {
+            return (
+              <li>
+                `${track.position} ${track.title} (${track.duration} min)`
+              </li>
+            );
+          })} 
+        {/* </TrackInformation>
+        <ButtonIcon onClick={toggle}>
+          {showTracks ? <MdExpandLess /> : <MdOutlineExpandMore />}
+        </ButtonIcon> */}
       </div>
     </Record>
   );
@@ -60,3 +88,11 @@ const BookmarkIcon = styled.input`
   top: 1rem;
   right: 1rem;
 `;
+
+// const TrackInformation = styled(RecordDetails)``;
+
+// const ButtonIcon = styled.button`
+//   position: absolute;
+//   bottom: 1rem;
+//   right: 1rem;
+// `;
