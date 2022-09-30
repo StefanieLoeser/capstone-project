@@ -23,7 +23,7 @@ export async function getServerSideProps({ query }) {
     order +
     '&page=' +
     page +
-    '&per_page=42';
+    '&per_page=100';
 
   const init = {
     headers: {
@@ -43,7 +43,7 @@ export async function getServerSideProps({ query }) {
 export default function Home({
   collectionState,
   onSetCollectionState,
-  onHandleChange,
+  onChange,
   myDiscogsCollection,
 }) {
   console.log(myDiscogsCollection);
@@ -63,11 +63,7 @@ export default function Home({
       <Section>
         <Collection>
           {collectionState.map((file) => (
-            <RecordFile
-              key={file.id}
-              record={file}
-              onHandleChange={onHandleChange}
-            />
+            <RecordFile key={file.id} record={file} onChange={onChange} />
           ))}
         </Collection>
       </Section>

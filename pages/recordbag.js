@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import RecordFile from '../components/RecordFile';
 
-export default function RecordBag({ selection, onHandleChange }) {
+export default function RecordBag({ selection, onChange }) {
   return (
     <>
       <Heading>
@@ -14,7 +14,7 @@ export default function RecordBag({ selection, onHandleChange }) {
             <RecordFile
               key={file.CatalogId}
               record={file}
-              onHandleChange={onHandleChange}
+              onChange={onChange}
             />
           ))}
         </Selection>

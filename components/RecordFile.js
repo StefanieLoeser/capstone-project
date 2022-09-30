@@ -1,27 +1,32 @@
 import styled from 'styled-components';
 
-export default function RecordFile({ record, onHandleChange }) {
+export default function RecordFile({ record, onChange }) {
   return (
     <Record>
-      <Cover src={record.basic_information.cover_image} />
+      <Cover src={record.basic_information?.cover_image} />
       <div>
         <BookmarkIcon
           type="checkbox"
           checked={record.isChecked}
-          onChange={() => onHandleChange(record.id)}
+          onChange={() => onChange(record.id)}
         />
-        <p>
-          <strong>{record.basic_information.artists.name}</strong>
-        </p>
-        <p>
-          <em>
-            <strong>{record.basic_information.title}</strong>
-          </em>
-          , {record.basic_information.year}
-        </p>
-        {/* <p>{record.labels}</p>
-        <p>{record.Format}</p>
-        <p>{record['Collection Media Condition']}</p> */}
+        <RecordDetails>
+          <li>
+            <strong>{record.basic_information?.artists[0].name}</strong>
+          </li>
+          <li>
+            <em>
+              <strong>{record.basic_information?.title}</strong>
+            </em>
+            , {record.basic_information?.year}
+          </li>
+          <li>{record.basic_information?.labels[0].name}</li>
+          {/* <li>{record.Format}</li> */}
+          {/* <li>{record.notes[0].value}</li> */}
+        </RecordDetails>
+      </div>
+      <div>
+        <p></p>
       </div>
     </Record>
   );
@@ -43,6 +48,11 @@ const Record = styled.li`
 
 const Cover = styled.img`
   width: 70px;
+`;
+
+const RecordDetails = styled.ul`
+  list-style: none;
+  max-width: 85%;
 `;
 
 const BookmarkIcon = styled.input`

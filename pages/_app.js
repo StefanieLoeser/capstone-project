@@ -1,28 +1,18 @@
-// import { useState } from 'react';
 import GlobalStyle from '../components/GlobalStyle';
 import Layout from '../components/Layout';
 import useLocalStorage from '../hooks/useLocalStorage';
-import collection from '../json/data-dummy.json';
 
 function MyApp({ Component, pageProps }) {
-  const myCollection = collection.map((file) => {
-    return { ...file, isChecked: false };
-  });
-
-  const [collectionState, setCollectionState] = useLocalStorage('_collection', [
-    myCollection,
-  ]);
-
-  // const [collectionState, setCollectionState] = useState(
-  //   '_collection',
-  //   []
-  // );
+  const [collectionState, setCollectionState] = useLocalStorage(
+    '_collection',
+    []
+  );
 
   const [selectionState, setSelectionState] = useLocalStorage('_selection', []);
 
   function handleChange(id) {
     const updatedCollection = collectionState.map((file) => {
-      if (file.CatalogId === id) {
+      if (file.id === id) {
         file.isChecked = !file.isChecked;
       }
       return file;
@@ -41,7 +31,7 @@ function MyApp({ Component, pageProps }) {
           onSetCollectionState={setCollectionState}
           selection={selectionState}
           onSetSelection={setSelectionState}
-          onHandleChange={handleChange}
+          onChange={handleChange}
         />
       </Layout>
     </>
