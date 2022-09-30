@@ -1,24 +1,6 @@
 import styled from 'styled-components';
-// import { MdOutlineExpandMore } from 'react-icons';
-// import { MdExpandLess } from 'react-icons';
-// import { useState } from 'react';
 
 export default function RecordFile({ record, onChange }) {
-  // const releaseApiUrl = record.basic_information?.resource_url;
-
-  // async function getServerSideProps() {
-  //   const res = await fetch(releaseApiUrl);
-  //   const data = await res.json();
-
-  //   return { props: { data } };
-  // }
-  // console.log(data);
-
-  // const [showTracks, setShowTracks] = useState(false);
-  // function toggle() {
-  //   setShowTracks(!showTracks);
-  // }
-
   return (
     <Record>
       <Cover src={record.basic_information?.thumb} />
@@ -39,22 +21,7 @@ export default function RecordFile({ record, onChange }) {
             , {record.basic_information?.year}
           </li>
           <li key={record.id}>{record.basic_information?.labels[0].name}</li>
-          {/* <li>{record.Format}</li> */}
-          {/* <li>{record.notes[0].value}</li> */}
         </RecordDetails>
-        {/* <TrackInformation style={{ display: showTracks ? 'block' : 'none' }}>
-          <li>A1 Testtrack (04:32 min)</li>
-          {/* {data.tracklist?.map((track) => {
-            return (
-              <li>
-                `${track.position} ${track.title} (${track.duration} min)`
-              </li>
-            );
-          })} 
-        {/* </TrackInformation>
-        <ButtonIcon onClick={toggle}>
-          {showTracks ? <MdExpandLess /> : <MdOutlineExpandMore />}
-        </ButtonIcon> */}
       </div>
     </Record>
   );
@@ -88,11 +55,3 @@ const BookmarkIcon = styled.input`
   top: 1rem;
   right: 1rem;
 `;
-
-// const TrackInformation = styled(RecordDetails)``;
-
-// const ButtonIcon = styled.button`
-//   position: absolute;
-//   bottom: 1rem;
-//   right: 1rem;
-// `;
