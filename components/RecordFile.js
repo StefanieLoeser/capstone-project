@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export default function RecordFile({ record, onChange }) {
+export default function RecordFile({ record, onToggleBookmark }) {
   return (
     <Record>
       <Cover src={record.basic_information?.thumb} />
@@ -8,7 +8,7 @@ export default function RecordFile({ record, onChange }) {
         <BookmarkIcon
           type="checkbox"
           checked={record.isChecked}
-          onChange={() => onChange(record.id)}
+          onChange={() => onToggleBookmark(record.id)}
         />
         <RecordDetails>
           <li key={record.id}>

@@ -44,7 +44,7 @@ export async function getServerSideProps({ query }) {
 export default function Home({
   collectionState,
   onSetCollectionState,
-  onChange,
+  onToggleBookmark,
   myDiscogsCollection,
 }) {
   useEffect(() => {
@@ -64,7 +64,11 @@ export default function Home({
       <Section>
         <Collection>
           {collectionState.map((file) => (
-            <RecordFile key={file.id} record={file} onChange={onChange} />
+            <RecordFile
+              key={file.id}
+              record={file}
+              onToggleBookmark={onToggleBookmark}
+            />
           ))}
         </Collection>
       </Section>

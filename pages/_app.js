@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
 
   const [selectionState, setSelectionState] = useLocalStorage('_selection', []);
 
-  function handleChange(id) {
+  function toggleBookmark(id) {
     const updatedCollection = collectionState.map((file) => {
       if (file.id === id) {
         file.isChecked = !file.isChecked;
@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }) {
           onSetCollectionState={setCollectionState}
           selection={selectionState}
           onSetSelection={setSelectionState}
-          onChange={handleChange}
+          onToggleBookmark={toggleBookmark}
         />
       </Layout>
     </>
