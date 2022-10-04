@@ -47,8 +47,6 @@ export default function Home({
   onChange,
   myDiscogsCollection,
 }) {
-  console.log(myDiscogsCollection);
-
   useEffect(() => {
     if (collectionState.length === 0) {
       return onSetCollectionState(myDiscogsCollection);
