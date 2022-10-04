@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Head from 'next/head';
 import RecordFile from '../components/RecordFile';
-import { useEffect } from 'react';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 export async function getServerSideProps({ query }) {
   const userToken = process.env.DISCOGS_USER_TOKEN;
@@ -41,17 +41,11 @@ export async function getServerSideProps({ query }) {
   return { props: { myDiscogsCollection, query } };
 }
 
-export default function Home({
-  collectionState,
-  onSetCollectionState,
-  onToggleBookmark,
-  myDiscogsCollection,
-}) {
-  useEffect(() => {
-    if (collectionState.length === 0) {
-      return onSetCollectionState(myDiscogsCollection);
-    }
-  }, []);
+export default function Home({ onToggleBookmark, myDiscogsCollection }) {
+  const [collectionState, setCollectionState] = useLocalStorage(
+    '_collection',
+    myDiscogsCollection
+  );
 
   return (
     <>
@@ -67,7 +61,9 @@ export default function Home({
             <RecordFile
               key={file.id}
               record={file}
-              onToggleBookmark={onToggleBookmark}
+              onToggleBookmark={() =>
+                onToggleBookmark(file.id, collectionState, setCollectionState)
+              }
             />
           ))}
         </Collection>

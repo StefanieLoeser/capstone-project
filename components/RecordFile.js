@@ -8,7 +8,7 @@ export default function RecordFile({ record, onToggleBookmark }) {
         <BookmarkIcon
           type="checkbox"
           checked={record.isChecked}
-          onChange={() => onToggleBookmark(record.id)}
+          onChange={onToggleBookmark}
         />
         <RecordDetails>
           <li key={record.id}>

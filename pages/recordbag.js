@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import RecordFile from '../components/RecordFile';
+import useLocalStorage from '../hooks/useLocalStorage';
 
-export default function RecordBag({ selection, onToggleBookmark }) {
+export default function RecordBag({ onToggleBookmark }) {
+  const [collectionState, setCollectionState] = useLocalStorage('_collection');
+
   return (
     <>
       <Heading>
@@ -10,13 +13,22 @@ export default function RecordBag({ selection, onToggleBookmark }) {
       <Section>
         <Text>Your selected records:</Text>
         <Selection>
-          {selection.map((file) => (
-            <RecordFile
-              key={file.CatalogId}
-              record={file}
-              onToggleBookmark={onToggleBookmark}
-            />
-          ))}
+          {collectionState &&
+            collectionState
+              .filter((record) => record.isChecked)
+              .map((file) => (
+                <RecordFile
+                  key={file.id}
+                  record={file}
+                  onToggleBookmark={() =>
+                    onToggleBookmark(
+                      file.id,
+                      collectionState,
+                      setCollectionState
+                    )
+                  }
+                />
+              ))}
         </Selection>
       </Section>
     </>
