@@ -14,7 +14,7 @@ export default function RecordBag({ selection, onToggleBookmark }) {
             <RecordFile
               key={file.CatalogId}
               record={file}
-              onChange={onToggleBookmark}
+              onToggleBookmark={onToggleBookmark}
             />
           ))}
         </Selection>
