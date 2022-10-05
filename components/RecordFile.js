@@ -1,6 +1,20 @@
+import { useState } from 'react';
 import styled from 'styled-components';
+import { useEffect } from 'react';
 
 export default function RecordFile({ record, onToggleBookmark }) {
+  const releaseApiUrl = record.basic_information?.resource_url;
+  const [tracklist, setTracklist] = useState([]);
+
+  useEffect(() => {
+    fetch(releaseApiUrl)
+      .then((response) => response.json())
+      .then((data) => setTracklist(data.tracklist))
+      .catch((error) => console.error(error));
+  }, []);
+
+  console.log(tracklist);
+
   return (
     <Record>
       <Cover src={record.basic_information?.thumb} />
@@ -14,7 +28,7 @@ export default function RecordFile({ record, onToggleBookmark }) {
           <li key={record.id}>
             <strong>{record.basic_information?.artists[0].name}</strong>
           </li>
-          <li key={record.id}>
+          <li key={record.instance_id}>
             <em>
               <strong>{record.basic_information?.title}</strong>
             </em>

@@ -29,6 +29,7 @@ export async function getServerSideProps({ query }) {
     headers: {
       'User-Agent': 'MyRecordsPlaylistApp/1.0.0 +http://localhost:3000/',
       Authorization: 'Discogs token=' + userToken,
+      'Access-Control-Allow-Origin': '*',
     },
   };
   const res = await fetch(collectionItemsByFolderURL, init);

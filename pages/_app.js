@@ -1,8 +1,9 @@
 import GlobalStyle from '../components/GlobalStyle';
 import Layout from '../components/Layout';
-import useLocalStorage from '../hooks/useLocalStorage';
 
 function MyApp({ Component, pageProps }) {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
   function toggleBookmark(id, collectionState, setCollectionState) {
     console.log(collectionState);
     const updatedCollection = collectionState.map((file) => {
@@ -18,7 +19,11 @@ function MyApp({ Component, pageProps }) {
     <>
       <GlobalStyle />
       <Layout>
-        <Component {...pageProps} onToggleBookmark={toggleBookmark} />
+        <Component
+          {...pageProps}
+          onToggleBookmark={toggleBookmark}
+          fetcher={fetcher}
+        />
       </Layout>
     </>
   );
