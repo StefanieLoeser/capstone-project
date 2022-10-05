@@ -1,8 +1,52 @@
 import styled from 'styled-components';
 import Head from 'next/head';
 import RecordFile from '../components/RecordFile';
+import useLocalStorage from '../hooks/useLocalStorage';
 
-export default function Home({ collectionState, onHandleChange }) {
+export async function getServerSideProps({ query }) {
+  const userToken = process.env.DISCOGS_USER_TOKEN;
+  const userID = process.env.DISCOGS_USER_ID;
+  const folderID = process.env.DISCOGS_FOLDER_ID;
+
+  const sort = query.sort ? query.sort : 'added';
+  const order = query.order ? query.order : 'desc';
+  const page = query.page ? query.page : '1';
+
+  const collectionItemsByFolderURL =
+    'https://api.discogs.com/users/' +
+    userID +
+    '/collection/folders/' +
+    folderID +
+    '/releases?sort=' +
+    sort +
+    '&sort_order=' +
+    order +
+    '&page=' +
+    page +
+    '&per_page=50';
+
+  const init = {
+    headers: {
+      'User-Agent': 'MyRecordsPlaylistApp/1.0.0 +http://localhost:3000/',
+      Authorization: 'Discogs token=' + userToken,
+    },
+  };
+  const res = await fetch(collectionItemsByFolderURL, init);
+  const data = await res.json();
+
+  const myDiscogsCollection = data.releases.map((file) => {
+    return { ...file, isChecked: false };
+  });
+
+  return { props: { myDiscogsCollection, query } };
+}
+
+export default function Home({ onToggleBookmark, myDiscogsCollection }) {
+  const [collectionState, setCollectionState] = useLocalStorage(
+    '_collection',
+    myDiscogsCollection
+  );
+
   return (
     <>
       <Head>
@@ -11,15 +55,19 @@ export default function Home({ collectionState, onHandleChange }) {
       <Heading>
         <h1>RecordCollection</h1>
       </Heading>
-      <Collection>
-        {collectionState.map((file) => (
-          <RecordFile
-            key={file.CatalogId}
-            record={file}
-            onHandleChange={onHandleChange}
-          />
-        ))}
-      </Collection>
+      <Section>
+        <Collection>
+          {collectionState.map((file) => (
+            <RecordFile
+              key={file.id}
+              record={file}
+              onToggleBookmark={() =>
+                onToggleBookmark(file.id, collectionState, setCollectionState)
+              }
+            />
+          ))}
+        </Collection>
+      </Section>
     </>
   );
 }
@@ -27,8 +75,14 @@ export default function Home({ collectionState, onHandleChange }) {
 const Collection = styled.ul`
   list-style: none;
   position: absolute;
-  top: 3rem;
-  bottom: 3rem;
+  padding: 3rem 1rem;
+`;
+
+const Section = styled.section`
+  position: relative;
+  display: flexbox;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const Heading = styled.header`

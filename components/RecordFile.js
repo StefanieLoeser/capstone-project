@@ -1,27 +1,27 @@
 import styled from 'styled-components';
 
-export default function RecordFile({ record, onHandleChange }) {
+export default function RecordFile({ record, onToggleBookmark }) {
   return (
     <Record>
-      <Cover src={record.Cover} />
+      <Cover src={record.basic_information?.thumb} />
       <div>
         <BookmarkIcon
           type="checkbox"
           checked={record.isChecked}
-          onChange={() => onHandleChange(record.CatalogId)}
+          onChange={onToggleBookmark}
         />
-        <p>
-          <strong>{record.Artist}</strong>
-        </p>
-        <p>
-          <em>
-            <strong>{record.Title}</strong>
-          </em>
-          , {record.Released}
-        </p>
-        <p>{record.Label}</p>
-        <p>{record.Format}</p>
-        <p>{record['Collection Media Condition']}</p>
+        <RecordDetails>
+          <li key={record.id}>
+            <strong>{record.basic_information?.artists[0].name}</strong>
+          </li>
+          <li key={record.id}>
+            <em>
+              <strong>{record.basic_information?.title}</strong>
+            </em>
+            , {record.basic_information?.year}
+          </li>
+          <li key={record.id}>{record.basic_information?.labels[0].name}</li>
+        </RecordDetails>
       </div>
     </Record>
   );
@@ -43,6 +43,11 @@ const Record = styled.li`
 
 const Cover = styled.img`
   width: 70px;
+`;
+
+const RecordDetails = styled.ul`
+  list-style: none;
+  max-width: 85%;
 `;
 
 const BookmarkIcon = styled.input`

@@ -1,43 +1,24 @@
 import GlobalStyle from '../components/GlobalStyle';
 import Layout from '../components/Layout';
 import useLocalStorage from '../hooks/useLocalStorage';
-import collection from '../json/data-dummy.json';
 
 function MyApp({ Component, pageProps }) {
-  const myCollection = collection.map((file) => {
-    return { ...file, isChecked: false };
-  });
-
-  const [collectionState, setCollectionState] = useLocalStorage(
-    '_collection',
-    myCollection
-  );
-
-  const [selectionState, setSelectionState] = useLocalStorage('_selection', []);
-
-  function handleChange(id) {
+  function toggleBookmark(id, collectionState, setCollectionState) {
+    console.log(collectionState);
     const updatedCollection = collectionState.map((file) => {
-      if (file.CatalogId === id) {
+      if (file.id === id) {
         file.isChecked = !file.isChecked;
       }
       return file;
     });
     setCollectionState(updatedCollection);
-    setSelectionState(updatedCollection.filter((record) => record.isChecked));
   }
 
   return (
     <>
       <GlobalStyle />
       <Layout>
-        <Component
-          {...pageProps}
-          collectionState={collectionState}
-          onSetCollectionState={setCollectionState}
-          selection={selectionState}
-          onSetSelection={setSelectionState}
-          onHandleChange={handleChange}
-        />
+        <Component {...pageProps} onToggleBookmark={toggleBookmark} />
       </Layout>
     </>
   );

@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import RecordFile from '../components/RecordFile';
+import useLocalStorage from '../hooks/useLocalStorage';
 
-export default function RecordBag({ selection, onHandleChange }) {
+export default function RecordBag({ onToggleBookmark }) {
+  const [collectionState, setCollectionState] = useLocalStorage('_collection');
+
   return (
     <>
       <Heading>
@@ -10,13 +13,22 @@ export default function RecordBag({ selection, onHandleChange }) {
       <Section>
         <Text>Your selected records:</Text>
         <Selection>
-          {selection.map((file) => (
-            <RecordFile
-              key={file.CatalogId}
-              record={file}
-              onHandleChange={onHandleChange}
-            />
-          ))}
+          {collectionState &&
+            collectionState
+              .filter((record) => record.isChecked)
+              .map((file) => (
+                <RecordFile
+                  key={file.id}
+                  record={file}
+                  onToggleBookmark={() =>
+                    onToggleBookmark(
+                      file.id,
+                      collectionState,
+                      setCollectionState
+                    )
+                  }
+                />
+              ))}
         </Selection>
       </Section>
     </>
@@ -26,15 +38,14 @@ export default function RecordBag({ selection, onHandleChange }) {
 const Selection = styled.ul`
   list-style: none;
   position: absolute;
-  top: 2rem;
-  bottom: 3rem;
+  padding: 3rem 1rem;
 `;
 
 const Section = styled.section`
-  display: grid;
   position: relative;
-  top: 4rem;
-  bottom: 3rem;
+  display: flexbox;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const Text = styled.p`
