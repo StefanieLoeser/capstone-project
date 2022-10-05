@@ -5,7 +5,6 @@ function MyApp({ Component, pageProps }) {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
   function toggleBookmark(id, collectionState, setCollectionState) {
-    console.log(collectionState);
     const updatedCollection = collectionState.map((file) => {
       if (file.id === id) {
         file.isChecked = !file.isChecked;

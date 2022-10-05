@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { useEffect } from 'react';
+// import { MdOutlineExpandMore } from 'react-icons';
+// import { MdExpandLess } from 'react-icons';
 
 export default function RecordFile({ record, onToggleBookmark }) {
   const releaseApiUrl = record.basic_information?.resource_url;
@@ -13,7 +15,10 @@ export default function RecordFile({ record, onToggleBookmark }) {
       .catch((error) => console.error(error));
   }, []);
 
-  console.log(tracklist);
+  const [showTracks, setShowTracks] = useState(false);
+  function toggleTracks() {
+    setShowTracks(!showTracks);
+  }
 
   return (
     <Record>
@@ -36,19 +41,24 @@ export default function RecordFile({ record, onToggleBookmark }) {
           </li>
           <li key={record.id}>{record.basic_information?.labels[0].name}</li>
         </RecordDetails>
-        <TrackInformation>
+        <TrackInformation
+          showTracks={showTracks}
+          style={{ display: showTracks ? 'block' : 'none' }}
+        >
           {tracklist.map((track) => {
             return (
-              <li key={track.position + track.title}>
-                {track.position}-{track.title}{' '}
+              <Tracks key={track.position + track.title}>
+                {track.position}-
+                <strong>
+                  {track.artists ? `${track.artists[0].name} -` : ''}
+                </strong>
+                <em>{track.title}</em>{' '}
                 {track.duration ? `(${track.duration} min)` : ''}
-              </li>
+              </Tracks>
             );
           })}
         </TrackInformation>
-        {/* <ButtonIcon onClick={toggle}>
-          {showTracks ? <MdExpandLess /> : <MdOutlineExpandMore />}
-        </ButtonIcon> */}
+        <ButtonIcon onClick={toggleTracks}>{showTracks ? '+' : 'x'}</ButtonIcon>
       </div>
     </Record>
   );
@@ -83,4 +93,16 @@ const BookmarkIcon = styled.input`
   right: 1rem;
 `;
 
-const TrackInformation = styled(RecordDetails)``;
+const TrackInformation = styled(RecordDetails)`
+  margin-top: 2rem;
+`;
+
+const Tracks = styled.li`
+  margin: 0.2rem 0;
+`;
+
+const ButtonIcon = styled.button`
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+`;
