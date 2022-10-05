@@ -1,6 +1,5 @@
 import GlobalStyle from '../components/GlobalStyle';
 import Layout from '../components/Layout';
-import useLocalStorage from '../hooks/useLocalStorage';
 
 function MyApp({ Component, pageProps }) {
   function toggleBookmark(id, collectionState, setCollectionState) {
