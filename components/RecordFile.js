@@ -36,6 +36,19 @@ export default function RecordFile({ record, onToggleBookmark }) {
           </li>
           <li key={record.id}>{record.basic_information?.labels[0].name}</li>
         </RecordDetails>
+        <TrackInformation>
+          {tracklist.map((track) => {
+            return (
+              <li key={track.position + track.title}>
+                {track.position}-{track.title}{' '}
+                {track.duration ? `(${track.duration} min)` : ''}
+              </li>
+            );
+          })}
+        </TrackInformation>
+        {/* <ButtonIcon onClick={toggle}>
+          {showTracks ? <MdExpandLess /> : <MdOutlineExpandMore />}
+        </ButtonIcon> */}
       </div>
     </Record>
   );
@@ -69,3 +82,5 @@ const BookmarkIcon = styled.input`
   top: 1rem;
   right: 1rem;
 `;
+
+const TrackInformation = styled(RecordDetails)``;
