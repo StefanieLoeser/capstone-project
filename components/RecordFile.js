@@ -1,23 +1,19 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { useEffect } from 'react';
-// import { MdOutlineExpandMore } from 'react-icons';
-// import { MdExpandLess } from 'react-icons';
 
 export default function RecordFile({ record, onToggleBookmark }) {
   const releaseApiUrl = record.basic_information?.resource_url;
+
   const [tracklist, setTracklist] = useState([]);
 
-  useEffect(() => {
+  const [showTracks, setShowTracks] = useState(false);
+
+  function toggleTracks() {
+    setShowTracks(!showTracks);
     fetch(releaseApiUrl)
       .then((response) => response.json())
       .then((data) => setTracklist(data.tracklist))
       .catch((error) => console.error(error));
-  }, []);
-
-  const [showTracks, setShowTracks] = useState(false);
-  function toggleTracks() {
-    setShowTracks(!showTracks);
   }
 
   return (
@@ -30,7 +26,7 @@ export default function RecordFile({ record, onToggleBookmark }) {
           onChange={onToggleBookmark}
         />
         <RecordDetails>
-          <li key={record.id}>
+          <li key={`#${record.id}`}>
             <strong>{record.basic_information?.artists[0].name}</strong>
           </li>
           <li key={record.instance_id}>
@@ -58,7 +54,7 @@ export default function RecordFile({ record, onToggleBookmark }) {
             );
           })}
         </TrackInformation>
-        <ButtonIcon onClick={toggleTracks}>{showTracks ? '+' : 'x'}</ButtonIcon>
+        <ButtonIcon onClick={toggleTracks}>{showTracks ? 'x' : '+'}</ButtonIcon>
       </div>
     </Record>
   );
@@ -103,6 +99,15 @@ const Tracks = styled.li`
 
 const ButtonIcon = styled.button`
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   bottom: 1rem;
   right: 1rem;
+  border: none;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  background-color: #dddddd;
+  color: #333333;
 `;

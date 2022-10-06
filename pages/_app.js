@@ -2,7 +2,7 @@ import GlobalStyle from '../components/GlobalStyle';
 import Layout from '../components/Layout';
 
 function MyApp({ Component, pageProps }) {
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  // const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
   function toggleBookmark(id, collectionState, setCollectionState) {
     const updatedCollection = collectionState.map((file) => {
@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }) {
         <Component
           {...pageProps}
           onToggleBookmark={toggleBookmark}
-          fetcher={fetcher}
+          // fetcher={fetcher}
         />
       </Layout>
     </>
