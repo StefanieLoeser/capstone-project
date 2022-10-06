@@ -1,10 +1,8 @@
 import GlobalStyle from '../components/GlobalStyle';
 import Layout from '../components/Layout';
-import useLocalStorage from '../hooks/useLocalStorage';
 
 function MyApp({ Component, pageProps }) {
   function toggleBookmark(id, collectionState, setCollectionState) {
-    console.log(collectionState);
     const updatedCollection = collectionState.map((file) => {
       if (file.id === id) {
         file.isChecked = !file.isChecked;

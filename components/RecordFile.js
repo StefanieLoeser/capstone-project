@@ -1,6 +1,21 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
 export default function RecordFile({ record, onToggleBookmark }) {
+  const releaseApiUrl = record.basic_information?.resource_url;
+
+  const [tracklist, setTracklist] = useState([]);
+
+  const [showTracks, setShowTracks] = useState(false);
+
+  function toggleTracks() {
+    setShowTracks(!showTracks);
+    fetch(releaseApiUrl)
+      .then((response) => response.json())
+      .then((data) => setTracklist(data.tracklist))
+      .catch((error) => console.error(error));
+  }
+
   return (
     <Record>
       <Cover src={record.basic_information?.thumb} />
@@ -11,10 +26,10 @@ export default function RecordFile({ record, onToggleBookmark }) {
           onChange={onToggleBookmark}
         />
         <RecordDetails>
-          <li key={record.id}>
+          <li key={`#${record.id}`}>
             <strong>{record.basic_information?.artists[0].name}</strong>
           </li>
-          <li key={record.id}>
+          <li key={record.instance_id}>
             <em>
               <strong>{record.basic_information?.title}</strong>
             </em>
@@ -22,6 +37,24 @@ export default function RecordFile({ record, onToggleBookmark }) {
           </li>
           <li key={record.id}>{record.basic_information?.labels[0].name}</li>
         </RecordDetails>
+        <TrackInformation
+          showTracks={showTracks}
+          style={{ display: showTracks ? 'block' : 'none' }}
+        >
+          {tracklist.map((track) => {
+            return (
+              <Tracks key={track.position + track.title}>
+                {track.position}-
+                <strong>
+                  {track.artists ? `${track.artists[0].name} - ` : ''}
+                </strong>
+                <em>{track.title}</em>{' '}
+                {track.duration ? `(${track.duration} min)` : ''}
+              </Tracks>
+            );
+          })}
+        </TrackInformation>
+        <ButtonIcon onClick={toggleTracks}>{showTracks ? '-' : '+'}</ButtonIcon>
       </div>
     </Record>
   );
@@ -54,4 +87,27 @@ const BookmarkIcon = styled.input`
   position: absolute;
   top: 1rem;
   right: 1rem;
+`;
+
+const TrackInformation = styled(RecordDetails)`
+  margin-top: 2rem;
+`;
+
+const Tracks = styled.li`
+  margin: 0.2rem 0;
+`;
+
+const ButtonIcon = styled.button`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 1rem;
+  right: 1rem;
+  border: none;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  background-color: #dddddd;
+  color: #333333;
 `;
