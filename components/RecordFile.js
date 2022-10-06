@@ -54,7 +54,7 @@ export default function RecordFile({ record, onToggleBookmark }) {
             );
           })}
         </TrackInformation>
-        <ButtonIcon onClick={toggleTracks}>{showTracks ? 'x' : '+'}</ButtonIcon>
+        <ButtonIcon onClick={toggleTracks}>{showTracks ? '-' : '+'}</ButtonIcon>
       </div>
     </Record>
   );
