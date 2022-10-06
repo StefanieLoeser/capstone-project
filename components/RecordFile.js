@@ -46,7 +46,7 @@ export default function RecordFile({ record, onToggleBookmark }) {
               <Tracks key={track.position + track.title}>
                 {track.position}-
                 <strong>
-                  {track.artists ? `${track.artists[0].name} -` : ''}
+                  {track.artists ? `${track.artists[0].name} - ` : ''}
                 </strong>
                 <em>{track.title}</em>{' '}
                 {track.duration ? `(${track.duration} min)` : ''}
