@@ -3,9 +3,7 @@ import styled from 'styled-components';
 
 export default function RecordFile({ record, onToggleBookmark }) {
   const releaseApiUrl = record.basic_information?.resource_url;
-
   const [tracklist, setTracklist] = useState([]);
-
   const [showTracks, setShowTracks] = useState(false);
 
   function toggleTracks() {
@@ -43,14 +41,14 @@ export default function RecordFile({ record, onToggleBookmark }) {
         >
           {tracklist.map((track) => {
             return (
-              <Tracks key={track.position + track.title}>
+              <Track key={track.position + track.title}>
                 {track.position}-
                 <strong>
                   {track.artists ? `${track.artists[0].name} - ` : ''}
                 </strong>
                 <em>{track.title}</em>{' '}
                 {track.duration ? `(${track.duration} min)` : ''}
-              </Tracks>
+              </Track>
             );
           })}
         </TrackInformation>
@@ -93,7 +91,7 @@ const TrackInformation = styled(RecordDetails)`
   margin-top: 2rem;
 `;
 
-const Tracks = styled.li`
+const Track = styled.li`
   margin: 0.2rem 0;
 `;
 
