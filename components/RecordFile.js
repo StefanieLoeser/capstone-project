@@ -68,9 +68,7 @@ export default function RecordFile({ record, onToggleBookmark }) {
         <VideoContainer
         // showVideos={showVideos}
         // style={{ display: showVideos ? 'block' : 'none' }}
-        >
-          <YoutubeEmbed embedId="oMhs8e12z_Q" />
-        </VideoContainer>
+        ></VideoContainer>
         <ButtonToggleTracks onClick={toggleTracks}>
           {showTracks ? '-' : '+'}
         </ButtonToggleTracks>
@@ -96,7 +94,7 @@ const Record = styled.li`
   box-shadow: 0px 0px 30px 10px rgba(51, 51, 51, 0.1);
   border-radius: 5px;
   font-family: 'Open Sans', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 `;
 
 const Cover = styled.img`
@@ -117,6 +115,7 @@ const BookmarkIcon = styled.input`
 const TrackInformation = styled(RecordDetails)`
   position: relative;
   margin-top: 2rem;
+  font-size: 11px;
 `;
 
 const Track = styled.li`

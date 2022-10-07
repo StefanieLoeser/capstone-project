@@ -1,6 +1,8 @@
 import getVideoId from 'get-video-id';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
+import YoutubeEmbed from './YoutubeEmbed';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 export default function YouTubeURLForm() {
   const {
@@ -13,19 +15,26 @@ export default function YouTubeURLForm() {
     },
   });
 
+  const [videos, setVideos] = useLocalStorage('_videos');
+
+  const onSubmit = (data) => {
+    setVideos(videos, ...data);
+    console.log(typeof videos.youtubeURL);
+  };
+
   return (
     <>
-      <form
-        onSubmit={handleSubmit((data) => {
-          console.log(data);
-        })}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <InputURL
           {...register('youtubeURL', {
             required: 'This field is required!',
             minLength: {
               value: 11,
               message: 'A Video-ID has 11 characters, a URL is even longer.',
+            },
+            maxLength: {
+              value: 200,
+              message: 'Your URL is too long!',
             },
           })}
           type="text"
@@ -34,6 +43,11 @@ export default function YouTubeURLForm() {
         <Submit type="submit" value="add" />
         <ErrorMessage>{errors.youtubeURL?.message}</ErrorMessage>
       </form>
+      {videos && 
+      {videos.map((video) => {
+        return <YoutubeEmbed embedId={getVideoId(videos.youtubeURL)} />
+ })
+      }
     </>
   );
 }
