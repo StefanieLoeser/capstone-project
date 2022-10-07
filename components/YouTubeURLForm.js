@@ -15,11 +15,16 @@ export default function YouTubeURLForm() {
     },
   });
 
-  const [videos, setVideos] = useLocalStorage('_videos');
+  const [video, setVideo] = useLocalStorage('_videos', []);
 
   const onSubmit = (data) => {
-    setVideos(videos, ...data);
-    console.log(typeof videos.youtubeURL);
+    const videoID = getVideoId(data.youtubeURL);
+    setVideo(videoID.id);
+    // console.log(videoID.id);
+    // if (videoID.id && videoID.service === 'youtube') {
+    //   setVideos(...videoID.id, videoID);
+    //   console.log(videos);
+    // }
   };
 
   return (
@@ -43,11 +48,11 @@ export default function YouTubeURLForm() {
         <Submit type="submit" value="add" />
         <ErrorMessage>{errors.youtubeURL?.message}</ErrorMessage>
       </form>
-      {videos && 
+      {/* {videos.length !== 0 ?
       {videos.map((video) => {
-        return <YoutubeEmbed embedId={getVideoId(videos.youtubeURL)} />
- })
-      }
+        return <YoutubeEmbed embedId={getVideoId(video)} />
+ })} : null } */}
+      {/* <YoutubeEmbed embedID={video} /> */}
     </>
   );
 }
