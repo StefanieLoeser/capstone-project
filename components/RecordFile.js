@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import YouTubeURLForm from './YouTubeURLForm';
+import YoutubeEmbed from './YoutubeEmbed';
 
 export default function RecordFile({ record, onToggleBookmark }) {
   const releaseApiUrl = record.basic_information?.resource_url;
@@ -14,6 +16,12 @@ export default function RecordFile({ record, onToggleBookmark }) {
       .then((response) => response.json())
       .then((data) => setTracklist(data.tracklist))
       .catch((error) => console.error(error));
+  }
+
+  const [showVideos, setShowVideos] = useState(false);
+
+  function toggleVideos() {
+    setShowVideos(!showVideos);
   }
 
   return (
@@ -37,24 +45,41 @@ export default function RecordFile({ record, onToggleBookmark }) {
           </li>
           <li key={record.id}>{record.basic_information?.labels[0].name}</li>
         </RecordDetails>
-        <TrackInformation
-          showTracks={showTracks}
-          style={{ display: showTracks ? 'block' : 'none' }}
+        <TrackContainer>
+          <TrackInformation
+            showTracks={showTracks}
+            style={{ display: showTracks ? 'block' : 'none' }}
+          >
+            {tracklist.map((track) => {
+              return (
+                <Track key={track.position + track.title}>
+                  {track.position}-
+                  <strong>
+                    {track.artists ? `${track.artists[0].name} - ` : ''}
+                  </strong>
+                  <em>{track.title}</em>{' '}
+                  {track.duration ? `(${track.duration} min)` : ''}
+                </Track>
+              );
+            })}
+          </TrackInformation>
+        </TrackContainer>
+        <YouTubeURLForm />
+        <VideoContainer
+        // showVideos={showVideos}
+        // style={{ display: showVideos ? 'block' : 'none' }}
         >
-          {tracklist.map((track) => {
-            return (
-              <Track key={track.position + track.title}>
-                {track.position}-
-                <strong>
-                  {track.artists ? `${track.artists[0].name} - ` : ''}
-                </strong>
-                <em>{track.title}</em>{' '}
-                {track.duration ? `(${track.duration} min)` : ''}
-              </Track>
-            );
-          })}
-        </TrackInformation>
-        <ButtonIcon onClick={toggleTracks}>{showTracks ? '-' : '+'}</ButtonIcon>
+          <YoutubeEmbed embedId="oMhs8e12z_Q" />
+        </VideoContainer>
+        <ButtonToggleTracks onClick={toggleTracks}>
+          {showTracks ? '-' : '+'}
+        </ButtonToggleTracks>
+        {/* <ButtonToggleVideos
+          // style={{ display: showTracks ? 'block' : 'none' }}
+          onClick={toggleVideos}
+        >
+          {showVideos ? '-' : '+'}
+        </ButtonToggleVideos> */}
       </div>
     </Record>
   );
@@ -90,6 +115,7 @@ const BookmarkIcon = styled.input`
 `;
 
 const TrackInformation = styled(RecordDetails)`
+  position: relative;
   margin-top: 2rem;
 `;
 
@@ -97,12 +123,12 @@ const Track = styled.li`
   margin: 0.2rem 0;
 `;
 
-const ButtonIcon = styled.button`
+const ButtonToggleTracks = styled.button`
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  bottom: 1rem;
+  top: 4.5rem;
   right: 1rem;
   border: none;
   border-radius: 50%;
@@ -110,4 +136,17 @@ const ButtonIcon = styled.button`
   height: 16px;
   background-color: #dddddd;
   color: #333333;
+`;
+
+const ButtonToggleVideos = styled(ButtonToggleTracks)`
+  top: 5.5rem;
+  background-color: hotpink;
+`;
+
+const TrackContainer = styled.div`
+  position: relative;
+`;
+
+const VideoContainer = styled(TrackContainer)`
+  margin-top: 2rem;
 `;
