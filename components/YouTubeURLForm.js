@@ -20,7 +20,7 @@ export default function YouTubeURLForm({
     recordID,
   });
 
-  const onSubmit = (data, recordID) => {
+  const onSubmit = (data) => {
     const videoID = getVideoId(data.youtubeURL);
     // if (videoID.id && videoID.service === 'youtube') {
     // }
@@ -60,10 +60,11 @@ export default function YouTubeURLForm({
         <ErrorMessage>{errors.youtubeURL?.message}</ErrorMessage>
       </form>
       {/* {record.videos.length !== 0 ?
-      {videos.map((video) => {
-        return <YoutubeEmbed embedId={getVideoId(video)} />
+      {record.videos.map((video) => {
+        return <YoutubeEmbed embedId={video} />
  })} : null } */}
-      {/* <YoutubeEmbed embedID="oMhs8e12z_Q" /> */}
+      {/* -------- Test-Video: ---------
+      <YoutubeEmbed embedID="oMhs8e12z_Q" /> */}
     </>
   );
 }
