@@ -3,7 +3,12 @@ import styled from 'styled-components';
 import YouTubeURLForm from './YouTubeURLForm';
 import YoutubeEmbed from './YoutubeEmbed';
 
-export default function RecordFile({ record, onToggleBookmark }) {
+export default function RecordFile({
+  record,
+  collection,
+  onSetCollection,
+  onToggleBookmark,
+}) {
   const releaseApiUrl = record.basic_information?.resource_url;
 
   const [tracklist, setTracklist] = useState([]);
@@ -31,7 +36,9 @@ export default function RecordFile({ record, onToggleBookmark }) {
         <BookmarkIcon
           type="checkbox"
           checked={record.isChecked}
-          onChange={onToggleBookmark}
+          onChange={() =>
+            onToggleBookmark(record.id, collection, onSetCollection)
+          }
         />
         <RecordDetails>
           <li key={`#${record.id}`}>
@@ -64,7 +71,11 @@ export default function RecordFile({ record, onToggleBookmark }) {
             })}
           </TrackInformation>
         </TrackContainer>
-        <YouTubeURLForm />
+        <YouTubeURLForm
+          setCollectionForVideos={onSetCollection}
+          collectionForVideos={collection}
+          recordID={record.id}
+        />
         <VideoContainer
         // showVideos={showVideos}
         // style={{ display: showVideos ? 'block' : 'none' }}
@@ -72,12 +83,12 @@ export default function RecordFile({ record, onToggleBookmark }) {
         <ButtonToggleTracks onClick={toggleTracks}>
           {showTracks ? '-' : '+'}
         </ButtonToggleTracks>
-        {/* <ButtonToggleVideos
+        <ButtonToggleVideos
           // style={{ display: showTracks ? 'block' : 'none' }}
           onClick={toggleVideos}
         >
           {showVideos ? '-' : '+'}
-        </ButtonToggleVideos> */}
+        </ButtonToggleVideos>
       </div>
     </Record>
   );

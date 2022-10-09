@@ -1,10 +1,14 @@
+import React from 'react';
 import getVideoId from 'get-video-id';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import YoutubeEmbed from './YoutubeEmbed';
-import useLocalStorage from '../hooks/useLocalStorage';
 
-export default function YouTubeURLForm() {
+export default function YouTubeURLForm({
+  recordID,
+  collection,
+  onSetCollection,
+}) {
   const {
     register,
     handleSubmit,
@@ -13,23 +17,30 @@ export default function YouTubeURLForm() {
     defaultValues: {
       youtubeURL: '',
     },
+    recordID,
   });
 
-  const [video, setVideo] = useLocalStorage('_videos', []);
-
-  const onSubmit = (data) => {
+  const onSubmit = (data, recordID) => {
     const videoID = getVideoId(data.youtubeURL);
-    setVideo(videoID.id);
-    // console.log(videoID.id);
     // if (videoID.id && videoID.service === 'youtube') {
-    //   setVideos(...videoID.id, videoID);
-    //   console.log(videos);
     // }
+    console.log(recordID, 'recordID');
+    console.log(collection, 'collection');
+    const collectionWithVideos = collection.map((record) => {
+      if (record.id === recordID) {
+        record.videos.push(videoID);
+      }
+      return file;
+    });
+    onSetCollection(collectionWithVideos);
+    console.log(collectionWithVideos);
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        onSubmit={handleSubmit(onSubmit, recordID, collection, onSetCollection)}
+      >
         <InputURL
           {...register('youtubeURL', {
             required: 'This field is required!',
@@ -48,11 +59,11 @@ export default function YouTubeURLForm() {
         <Submit type="submit" value="add" />
         <ErrorMessage>{errors.youtubeURL?.message}</ErrorMessage>
       </form>
-      {/* {videos.length !== 0 ?
+      {/* {record.videos.length !== 0 ?
       {videos.map((video) => {
         return <YoutubeEmbed embedId={getVideoId(video)} />
  })} : null } */}
-      {/* <YoutubeEmbed embedID={video} /> */}
+      {/* <YoutubeEmbed embedID="oMhs8e12z_Q" /> */}
     </>
   );
 }

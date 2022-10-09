@@ -35,18 +35,19 @@ export async function getServerSideProps({ query }) {
   const data = await res.json();
 
   const myDiscogsCollection = data.releases.map((file) => {
-    return { ...file, isChecked: false };
+    return { ...file, isChecked: false, videos: [] };
   });
+
+  console.log(myDiscogsCollection);
 
   return { props: { myDiscogsCollection, query } };
 }
 
-export default function Home({ onToggleBookmark, myDiscogsCollection }) {
-  const [collectionState, setCollectionState] = useLocalStorage(
-    '_collection',
-    myDiscogsCollection
-  );
-
+export default function Home({
+  onToggleBookmark,
+  collection,
+  onSetCollection,
+}) {
   return (
     <>
       <Head>
@@ -57,12 +58,12 @@ export default function Home({ onToggleBookmark, myDiscogsCollection }) {
       </Heading>
       <Section>
         <Collection>
-          {collectionState.map((file) => (
+          {collection.map((file) => (
             <RecordFile
               key={file.id}
               record={file}
               onToggleBookmark={() =>
-                onToggleBookmark(file.id, collectionState, setCollectionState)
+                onToggleBookmark(file.id, collection, onSetCollection)
               }
             />
           ))}

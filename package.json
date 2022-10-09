@@ -11,6 +11,9 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/material": "^5.10.8",
     "get-video-id": "^3.6.5",
     "next": "12.3.0",
     "next-auth": "^4.12.2",
