@@ -71,11 +71,7 @@ export default function RecordFile({
             })}
           </TrackInformation>
         </TrackContainer>
-        <YouTubeURLForm
-          setCollectionForVideos={onSetCollection}
-          collectionForVideos={collection}
-          recordID={record.id}
-        />
+        <YouTubeURLForm recordID={record.id} />
         <VideoContainer
         // showVideos={showVideos}
         // style={{ display: showVideos ? 'block' : 'none' }}
