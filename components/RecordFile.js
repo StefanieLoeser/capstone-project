@@ -10,7 +10,7 @@ export default function RecordFile({
   onToggleBookmark,
 }) {
   const releaseApiUrl = record.basic_information?.resource_url;
-
+  const musicVideos = record.videos;
   const [tracklist, setTracklist] = useState([]);
 
   const [showTracks, setShowTracks] = useState(false);
@@ -71,18 +71,24 @@ export default function RecordFile({
             })}
           </TrackInformation>
         </TrackContainer>
-        <YouTubeURLForm recordID={record.id} />
+        <YouTubeURLForm
+          recordID={record.id}
+          collection={collection}
+          onSetCollection={onSetCollection}
+        />
         <VideoContainer
-        // showVideos={showVideos}
-        // style={{ display: showVideos ? 'block' : 'none' }}
-        ></VideoContainer>
+          showVideos={showVideos}
+          style={{ display: showVideos ? 'block' : 'none' }}
+        >
+          {musicVideos.map((video) => {
+            return <YoutubeEmbed key={video} embedId={video} />;
+          })}
+        </VideoContainer>
+
         <ButtonToggleTracks onClick={toggleTracks}>
           {showTracks ? '-' : '+'}
         </ButtonToggleTracks>
-        <ButtonToggleVideos
-          // style={{ display: showTracks ? 'block' : 'none' }}
-          onClick={toggleVideos}
-        >
+        <ButtonToggleVideos onClick={toggleVideos}>
           {showVideos ? '-' : '+'}
         </ButtonToggleVideos>
       </div>

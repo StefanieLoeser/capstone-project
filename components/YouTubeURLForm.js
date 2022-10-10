@@ -2,7 +2,6 @@ import React from 'react';
 import getVideoId from 'get-video-id';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import YoutubeEmbed from './YoutubeEmbed';
 
 export default function YouTubeURLForm({
   recordID,
@@ -22,24 +21,26 @@ export default function YouTubeURLForm({
 
   const onSubmit = (data) => {
     const videoID = getVideoId(data.youtubeURL);
-    // if (videoID.id && videoID.service === 'youtube') {
-    // }
-    console.log(recordID, 'recordID');
-    console.log(collection, 'collection');
+    if (videoID.id && videoID.service === 'youtube') {
+    }
     const collectionWithVideos = collection.map((record) => {
-      if (record.id === recordID) {
-        record.videos.push(videoID);
+      if (
+        record.id === recordID &&
+        record.videos.includes(videoID.id) === false
+      ) {
+        record.videos.push(videoID.id);
       }
-      return file;
+      return record;
     });
     onSetCollection(collectionWithVideos);
-    console.log(collectionWithVideos);
   };
 
   return (
     <>
       <form
-        onSubmit={handleSubmit(onSubmit, recordID, collection, onSetCollection)}
+        onSubmit={handleSubmit((data) =>
+          onSubmit(data, recordID, collection, onSetCollection)
+        )}
       >
         <InputURL
           {...register('youtubeURL', {
@@ -59,12 +60,6 @@ export default function YouTubeURLForm({
         <Submit type="submit" value="add" />
         <ErrorMessage>{errors.youtubeURL?.message}</ErrorMessage>
       </form>
-      {/* {record.videos.length !== 0 ?
-      {record.videos.map((video) => {
-        return <YoutubeEmbed embedId={video} />
- })} : null } */}
-      {/* -------- Test-Video: ---------
-      <YoutubeEmbed embedID="oMhs8e12z_Q" /> */}
     </>
   );
 }
