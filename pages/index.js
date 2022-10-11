@@ -1,108 +1,82 @@
 import styled from 'styled-components';
-import Head from 'next/head';
-import RecordFile from '../components/RecordFile';
-import useLocalStorage from '../hooks/useLocalStorage';
-import { useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import trolley from '../public/assets/icons8-01-trolley-sbts2018-outline/icon-trolley-58.png';
+import collection from '../public/assets/icons8-multiple-artist-collection-of-music-and-songs-from-different-distributors-tal-revivo-light/icon-collection-48.png';
 
-export async function getServerSideProps({ query }) {
-  const userToken = process.env.DISCOGS_USER_TOKEN;
-  const userID = process.env.DISCOGS_USER_ID;
-  const folderID = process.env.DISCOGS_FOLDER_ID;
-
-  const sort = query.sort ? query.sort : 'added';
-  const order = query.order ? query.order : 'desc';
-  // const page = query.page ? query.page : '1';
-
-  const collectionItemsByFolderURL =
-    'https://api.discogs.com/users/' +
-    userID +
-    '/collection/folders/' +
-    folderID +
-    '/releases?sort=' +
-    sort +
-    '&sort_order=' +
-    order;
-  // +
-  // '&page=' +
-  // page +
-  // '&per_page=50';
-
-  const init = {
-    headers: {
-      'User-Agent': 'MyRecordsPlaylistApp/1.0.0 +http://localhost:3000/',
-      Authorization: 'Discogs token=' + userToken,
-    },
-  };
-  const res = await fetch(collectionItemsByFolderURL, init);
-  const data = await res.json();
-
-  const myDiscogsCollection = data.releases.map((file) => {
-    return { ...file, isChecked: false, videos: [] };
-  });
-
-  return { props: { myDiscogsCollection, query } };
-}
-
-export default function Home({ onToggleBookmark, myDiscogsCollection }) {
-  const [collectionState, setCollectionState] = useLocalStorage(
-    '_collection',
-    myDiscogsCollection
-  );
-
+export default function Home() {
   return (
     <>
-      <Head>
-        <title>RecordBag</title>
-      </Head>
-      <Heading>
-        <h1>RecordCollection</h1>
-      </Heading>
-      <CollectionWrapper>
-        <CollectionList>
-          {collectionState.map((file) => (
-            <RecordFile
-              key={file.id}
-              record={file}
-              collection={collectionState}
-              onSetCollection={setCollectionState}
-              onToggleBookmark={() =>
-                onToggleBookmark(file.id, collectionState, setCollectionState)
-              }
-            />
-          ))}
-        </CollectionList>
-      </CollectionWrapper>
+      <LandingBody>
+        <NavWrapper>
+          <Link href="/collection">
+            <NavLink>
+              browse your collection
+              <Image
+                alt="to collection"
+                src={collection}
+                // layout="responsive"
+                width={80}
+                height={50}
+              />
+            </NavLink>
+          </Link>
+          <Slogan>
+            Get ready for your gig. Pack your <em>RecordBag</em>.
+          </Slogan>
+          <Link href="/recordbag">
+            <NavLink>
+              <Image
+                alt="to recordbag"
+                src={trolley}
+                // layout="responsive"
+                width={80}
+                height={60}
+              />
+              check what's in your bag
+            </NavLink>
+          </Link>
+        </NavWrapper>
+      </LandingBody>
     </>
   );
 }
 
-const CollectionList = styled.ul`
-  list-style: none;
-  position: absolute;
-  padding: 3rem 1rem;
-`;
-
-const CollectionWrapper = styled.section`
-  position: relative;
+const LandingBody = styled.section`
   display: flex;
   flex-direction: column;
-  margin: auto;
   align-items: center;
+  justify-content: center;
+  position: relative;
+  gap: 5rem;
+  background-color: #333333;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
 `;
 
-const Heading = styled.header`
-  background-color: #333333;
-  width: 100%;
-  height: 48px;
-  color: white;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: bold;
-  font-size: 0.6rem;
+const NavWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  position: fixed;
-  top: 0;
-  margin: 0;
-  z-index: 1;
+  justify-content: center;
+  position: relative;
+  gap: 2rem;
+  /* top: -4rem; */
+`;
+
+const Slogan = styled.h1`
+  text-align: center;
+  color: white;
+  width: 60vw;
+`;
+
+const NavLink = styled.a`
+  text-decoration: none;
+  color: white;
+  margin: 3rem;
+  :hover {
+    color: hotpink;
+    cursor: pointer;
+  }
 `;
