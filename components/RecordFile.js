@@ -1,9 +1,21 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import YouTubeURLForm from './YouTubeURLForm';
+import YoutubeEmbed from './YoutubeEmbed';
+import Image from 'next/image';
+import iconOpenList from '../public/assets/icon_open_list.png';
+import iconCloseList from '../public/assets/icon_close_list.png';
+import iconShowVideos from '../public/assets/icon-video-player-red.png';
+import Bookmark from './Bookmark';
 
-export default function RecordFile({ record, onToggleBookmark }) {
+export default function RecordFile({
+  record,
+  collection,
+  onSetCollection,
+  onToggleBookmark,
+}) {
   const releaseApiUrl = record.basic_information?.resource_url;
-
+  const musicVideos = record.videos;
   const [tracklist, setTracklist] = useState([]);
 
   const [showTracks, setShowTracks] = useState(false);
@@ -16,14 +28,48 @@ export default function RecordFile({ record, onToggleBookmark }) {
       .catch((error) => console.error(error));
   }
 
+  const [showVideos, setShowVideos] = useState(false);
+
+  function toggleVideos() {
+    setShowVideos(!showVideos);
+  }
+
   return (
     <Record>
-      <Cover src={record.basic_information?.thumb} />
+      <CoverAndButtons>
+        <Cover src={record.basic_information?.thumb} />
+        <ButtonToggleTracks onClick={toggleTracks}>
+          <Icon showTracks={showTracks}>
+            <Image
+              alt={showTracks ? 'hide tracks' : 'show tracks'}
+              src={showTracks ? iconCloseList : iconOpenList}
+              layout="responsive"
+              width={30}
+              height={30}
+            />
+            {/* {showTracks ? 'less' : 'more'} */}
+          </Icon>
+        </ButtonToggleTracks>
+        <ButtonToggleVideos onClick={toggleVideos}>
+          <Icon showVideos={showVideos}>
+            <Image
+              alt={showVideos ? 'hide videos' : 'show videos'}
+              src={showVideos ? iconCloseList : iconShowVideos}
+              layout="responsive"
+              width={24}
+              height={24}
+            />
+            {/* {showVideos ? '-' : '+'} */}
+          </Icon>
+        </ButtonToggleVideos>
+      </CoverAndButtons>
       <div>
         <BookmarkIcon
           type="checkbox"
           checked={record.isChecked}
-          onChange={onToggleBookmark}
+          onChange={() =>
+            onToggleBookmark(record.id, collection, onSetCollection)
+          }
         />
         <RecordDetails>
           <li key={`#${record.id}`}>
@@ -37,37 +83,62 @@ export default function RecordFile({ record, onToggleBookmark }) {
           </li>
           <li key={record.id}>{record.basic_information?.labels[0].name}</li>
         </RecordDetails>
-        <TrackInformation
-          showTracks={showTracks}
-          style={{ display: showTracks ? 'block' : 'none' }}
-        >
-          {tracklist.map((track) => {
-            return (
-              <Tracks key={track.position + track.title}>
-                {track.position}-
-                <strong>
-                  {track.artists ? `${track.artists[0].name} - ` : ''}
-                </strong>
-                <em>{track.title}</em>{' '}
-                {track.duration ? `(${track.duration} min)` : ''}
-              </Tracks>
-            );
-          })}
-        </TrackInformation>
-        <ButtonIcon onClick={toggleTracks}>{showTracks ? '-' : '+'}</ButtonIcon>
+        <TrackContainer>
+          <TrackInformation
+            showTracks={showTracks}
+            style={{ display: showTracks ? 'block' : 'none' }}
+          >
+            {tracklist.map((track) => {
+              return (
+                <Track key={track.position + track.title}>
+                  {track.position}-
+                  <strong>
+                    {track.artists ? `${track.artists[0].name} - ` : ''}
+                  </strong>
+                  <em>{track.title}</em>{' '}
+                  {track.duration ? `(${track.duration} min)` : ''}
+                </Track>
+              );
+            })}
+          </TrackInformation>
+        </TrackContainer>
       </div>
+      <VideoContainer
+        showVideos={showVideos}
+        style={{ display: showVideos ? 'block' : 'none' }}
+      >
+        <YouTubeURLForm
+          recordID={record.id}
+          collection={collection}
+          onSetCollection={onSetCollection}
+        />
+        {musicVideos.map((video) => {
+          return <YoutubeEmbed key={video} embedId={video} />;
+        })}
+      </VideoContainer>
     </Record>
   );
 }
+
+const CoverAndButtons = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+`;
+
+const Icon = styled.div`
+  height: 1rem;
+  width: 1rem;
+`;
 
 const Record = styled.li`
   display: grid;
   position: relative;
   grid-template-columns: 25% 75%;
-  gap: 1rem;
-  margin: 1rem;
+  gap: 0.5rem;
+  margin: 1rem 0;
   padding: 1rem;
-  width: 95%;
+  /* max-width: 95%; */
+  width: 300px;
   box-shadow: 0px 0px 30px 10px rgba(51, 51, 51, 0.1);
   border-radius: 5px;
   font-family: 'Open Sans', sans-serif;
@@ -75,12 +146,16 @@ const Record = styled.li`
 `;
 
 const Cover = styled.img`
-  width: 70px;
+  width: 60px;
+  height: 60px;
+  position: relative;
+  top: 1px;
+  left: 1px;
 `;
 
 const RecordDetails = styled.ul`
   list-style: none;
-  max-width: 85%;
+  width: 85%;
 `;
 
 const BookmarkIcon = styled.input`
@@ -90,24 +165,42 @@ const BookmarkIcon = styled.input`
 `;
 
 const TrackInformation = styled(RecordDetails)`
+  position: relative;
+  min-width: 00px;
   margin-top: 2rem;
+  font-size: 11px;
 `;
 
-const Tracks = styled.li`
+const Track = styled.li`
   margin: 0.2rem 0;
 `;
 
-const ButtonIcon = styled.button`
+const ButtonToggleTracks = styled.button`
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  bottom: 1rem;
-  right: 1rem;
+  top: 2.3rem;
+  right: 0.7rem;
   border: none;
   border-radius: 50%;
-  width: 16px;
-  height: 16px;
-  background-color: #dddddd;
+  padding: 0.2rem;
+  /* width: 16px;
+  height: 16px; */
+  /* background-color: #dddddd; */
+  background: none;
   color: #333333;
+`;
+
+const ButtonToggleVideos = styled(ButtonToggleTracks)`
+  top: 3.8rem;
+  background: none;
+`;
+
+const TrackContainer = styled.div`
+  position: relative;
+`;
+
+const VideoContainer = styled(TrackContainer)`
+  /* margin-top: 2rem; */
 `;

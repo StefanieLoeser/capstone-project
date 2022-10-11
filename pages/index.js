@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Head from 'next/head';
 import RecordFile from '../components/RecordFile';
 import useLocalStorage from '../hooks/useLocalStorage';
+import { useEffect } from 'react';
 
 export async function getServerSideProps({ query }) {
   const userToken = process.env.DISCOGS_USER_TOKEN;
@@ -10,7 +11,7 @@ export async function getServerSideProps({ query }) {
 
   const sort = query.sort ? query.sort : 'added';
   const order = query.order ? query.order : 'desc';
-  const page = query.page ? query.page : '1';
+  // const page = query.page ? query.page : '1';
 
   const collectionItemsByFolderURL =
     'https://api.discogs.com/users/' +
@@ -20,10 +21,11 @@ export async function getServerSideProps({ query }) {
     '/releases?sort=' +
     sort +
     '&sort_order=' +
-    order +
-    '&page=' +
-    page +
-    '&per_page=50';
+    order;
+  // +
+  // '&page=' +
+  // page +
+  // '&per_page=50';
 
   const init = {
     headers: {
@@ -35,7 +37,7 @@ export async function getServerSideProps({ query }) {
   const data = await res.json();
 
   const myDiscogsCollection = data.releases.map((file) => {
-    return { ...file, isChecked: false };
+    return { ...file, isChecked: false, videos: [] };
   });
 
   return { props: { myDiscogsCollection, query } };
@@ -55,34 +57,37 @@ export default function Home({ onToggleBookmark, myDiscogsCollection }) {
       <Heading>
         <h1>RecordCollection</h1>
       </Heading>
-      <Section>
-        <Collection>
+      <CollectionWrapper>
+        <CollectionList>
           {collectionState.map((file) => (
             <RecordFile
               key={file.id}
               record={file}
+              collection={collectionState}
+              onSetCollection={setCollectionState}
               onToggleBookmark={() =>
                 onToggleBookmark(file.id, collectionState, setCollectionState)
               }
             />
           ))}
-        </Collection>
-      </Section>
+        </CollectionList>
+      </CollectionWrapper>
     </>
   );
 }
 
-const Collection = styled.ul`
+const CollectionList = styled.ul`
   list-style: none;
   position: absolute;
   padding: 3rem 1rem;
 `;
 
-const Section = styled.section`
+const CollectionWrapper = styled.section`
   position: relative;
-  display: flexbox;
+  display: flex;
   flex-direction: column;
-  justify-content: center;
+  margin: auto;
+  align-items: center;
 `;
 
 const Heading = styled.header`

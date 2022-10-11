@@ -1,7 +1,13 @@
 import GlobalStyle from '../components/GlobalStyle';
 import Layout from '../components/Layout';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 function MyApp({ Component, pageProps }) {
+  const [collectionState, setCollectionState] = useLocalStorage(
+    '_collection',
+    []
+  );
+
   function toggleBookmark(id, collectionState, setCollectionState) {
     const updatedCollection = collectionState.map((file) => {
       if (file.id === id) {
@@ -16,7 +22,12 @@ function MyApp({ Component, pageProps }) {
     <>
       <GlobalStyle />
       <Layout>
-        <Component {...pageProps} onToggleBookmark={toggleBookmark} />
+        <Component
+          {...pageProps}
+          collection={collectionState}
+          onSetCollection={setCollectionState}
+          onToggleBookmark={toggleBookmark}
+        />
       </Layout>
     </>
   );
