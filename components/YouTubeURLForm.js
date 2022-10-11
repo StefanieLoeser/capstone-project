@@ -69,16 +69,18 @@ const Submit = styled.input`
   color: white;
   border: none;
   border-radius: 3px;
-  padding: 0.3rem 0.5rem;
-  margin: 0.5rem 0.7rem;
+  padding: 0.2rem 0.4rem;
+  margin: 0 0.7rem 0.5rem;
 `;
 
 const InputURL = styled.input`
   padding: 0.2rem;
   border: none;
-  box-shadow: 0px 0px 5px 1px rgba(51, 51, 51, 0.3);
+  /* box-shadow: 0px 0px 5px 1px rgba(51, 51, 51, 0.3); */
+  border: 1px solid #c7c7c7;
+  border-radius: 2px;
   font-family: 'Open Sans', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
 `;
 
 const ErrorMessage = styled.p`

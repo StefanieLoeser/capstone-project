@@ -11,7 +11,7 @@ export async function getServerSideProps({ query }) {
 
   const sort = query.sort ? query.sort : 'added';
   const order = query.order ? query.order : 'desc';
-  const page = query.page ? query.page : '1';
+  // const page = query.page ? query.page : '1';
 
   const collectionItemsByFolderURL =
     'https://api.discogs.com/users/' +
@@ -21,10 +21,11 @@ export async function getServerSideProps({ query }) {
     '/releases?sort=' +
     sort +
     '&sort_order=' +
-    order +
-    '&page=' +
-    page +
-    '&per_page=50';
+    order;
+  // +
+  // '&page=' +
+  // page +
+  // '&per_page=50';
 
   const init = {
     headers: {
@@ -56,8 +57,8 @@ export default function Home({ onToggleBookmark, myDiscogsCollection }) {
       <Heading>
         <h1>RecordCollection</h1>
       </Heading>
-      <Section>
-        <Collection>
+      <CollectionWrapper>
+        <CollectionList>
           {collectionState.map((file) => (
             <RecordFile
               key={file.id}
@@ -69,23 +70,24 @@ export default function Home({ onToggleBookmark, myDiscogsCollection }) {
               }
             />
           ))}
-        </Collection>
-      </Section>
+        </CollectionList>
+      </CollectionWrapper>
     </>
   );
 }
 
-const Collection = styled.ul`
+const CollectionList = styled.ul`
   list-style: none;
   position: absolute;
   padding: 3rem 1rem;
 `;
 
-const Section = styled.section`
+const CollectionWrapper = styled.section`
   position: relative;
-  display: flexbox;
+  display: flex;
   flex-direction: column;
-  justify-content: center;
+  margin: 0;
+  /* justify-content: center; */
 `;
 
 const Heading = styled.header`

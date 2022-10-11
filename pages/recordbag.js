@@ -10,9 +10,9 @@ export default function RecordBag({ onToggleBookmark }) {
       <Heading>
         <h1>RecordBag</h1>
       </Heading>
-      <Section>
-        <Text>Your selected records:</Text>
-        <Selection>
+      <Text>Your selected records:</Text>
+      <SelectionWrapper>
+        <SelectionList>
           {collectionState &&
             collectionState
               .filter((record) => record.isChecked)
@@ -29,23 +29,24 @@ export default function RecordBag({ onToggleBookmark }) {
                   }
                 />
               ))}
-        </Selection>
-      </Section>
+        </SelectionList>
+      </SelectionWrapper>
     </>
   );
 }
 
-const Selection = styled.ul`
+const SelectionWrapper = styled.section`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  /* justify-content: center; */
+`;
+
+const SelectionList = styled.ul`
   list-style: none;
   position: absolute;
   padding: 3rem 1rem;
-`;
-
-const Section = styled.section`
-  position: relative;
-  display: flexbox;
-  flex-direction: column;
-  justify-content: center;
 `;
 
 const Text = styled.p`
@@ -53,6 +54,9 @@ const Text = styled.p`
   font-weight: bold;
   font-size: 0.9rem;
   text-align: center;
+  position: relative;
+  top: 3rem;
+  margin: 1rem;
 `;
 
 const Heading = styled.header`

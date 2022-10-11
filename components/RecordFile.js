@@ -2,6 +2,11 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import YouTubeURLForm from './YouTubeURLForm';
 import YoutubeEmbed from './YoutubeEmbed';
+import Image from 'next/image';
+import iconOpenList from '../public/assets/icon_open_list.png';
+import iconCloseList from '../public/assets/icon_close_list.png';
+import iconShowVideos from '../public/assets/icon-video-player-red.png';
+import Bookmark from './Bookmark';
 
 export default function RecordFile({
   record,
@@ -31,7 +36,33 @@ export default function RecordFile({
 
   return (
     <Record>
-      <Cover src={record.basic_information?.thumb} />
+      <CoverAndButtons>
+        <Cover src={record.basic_information?.thumb} />
+        <ButtonToggleTracks onClick={toggleTracks}>
+          <Icon showTracks={showTracks}>
+            <Image
+              alt={showTracks ? 'hide tracks' : 'show tracks'}
+              src={showTracks ? iconCloseList : iconOpenList}
+              layout="responsive"
+              width={30}
+              height={30}
+            />
+            {/* {showTracks ? 'less' : 'more'} */}
+          </Icon>
+        </ButtonToggleTracks>
+        <ButtonToggleVideos onClick={toggleVideos}>
+          <Icon showVideos={showVideos}>
+            <Image
+              alt={showVideos ? 'hide videos' : 'show videos'}
+              src={showVideos ? iconCloseList : iconShowVideos}
+              layout="responsive"
+              width={24}
+              height={24}
+            />
+            {/* {showVideos ? '-' : '+'} */}
+          </Icon>
+        </ButtonToggleVideos>
+      </CoverAndButtons>
       <div>
         <BookmarkIcon
           type="checkbox"
@@ -71,52 +102,61 @@ export default function RecordFile({
             })}
           </TrackInformation>
         </TrackContainer>
-        <YouTubeURLForm
-          recordID={record.id}
-          collection={collection}
-          onSetCollection={onSetCollection}
-        />
+
         <VideoContainer
           showVideos={showVideos}
           style={{ display: showVideos ? 'block' : 'none' }}
         >
+          <YouTubeURLForm
+            recordID={record.id}
+            collection={collection}
+            onSetCollection={onSetCollection}
+          />
           {musicVideos.map((video) => {
             return <YoutubeEmbed key={video} embedId={video} />;
           })}
         </VideoContainer>
-
-        <ButtonToggleTracks onClick={toggleTracks}>
-          {showTracks ? '-' : '+'}
-        </ButtonToggleTracks>
-        <ButtonToggleVideos onClick={toggleVideos}>
-          {showVideos ? '-' : '+'}
-        </ButtonToggleVideos>
       </div>
     </Record>
   );
 }
 
+const CoverAndButtons = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+`;
+
+const Icon = styled.div`
+  height: 1rem;
+  width: 1rem;
+`;
+
 const Record = styled.li`
   display: grid;
   position: relative;
   grid-template-columns: 25% 75%;
-  gap: 1rem;
+  gap: 0.5rem;
   margin: 1rem;
   padding: 1rem;
   width: 95%;
+  min-width: 300px;
   box-shadow: 0px 0px 30px 10px rgba(51, 51, 51, 0.1);
   border-radius: 5px;
   font-family: 'Open Sans', sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 `;
 
 const Cover = styled.img`
-  width: 70px;
+  width: 60px;
+  height: 60px;
+  position: relative;
+  top: 1px;
+  left: 1px;
 `;
 
 const RecordDetails = styled.ul`
   list-style: none;
-  max-width: 85%;
+  width: 85%;
 `;
 
 const BookmarkIcon = styled.input`
@@ -140,19 +180,21 @@ const ButtonToggleTracks = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 4.5rem;
-  right: 1rem;
+  top: 2.3rem;
+  right: 0.7rem;
   border: none;
   border-radius: 50%;
-  width: 16px;
-  height: 16px;
-  background-color: #dddddd;
+  padding: 0.2rem;
+  /* width: 16px;
+  height: 16px; */
+  /* background-color: #dddddd; */
+  background: none;
   color: #333333;
 `;
 
 const ButtonToggleVideos = styled(ButtonToggleTracks)`
-  top: 5.5rem;
-  background-color: hotpink;
+  top: 3.8rem;
+  background: none;
 `;
 
 const TrackContainer = styled.div`
