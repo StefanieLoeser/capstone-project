@@ -2,6 +2,7 @@ import React from 'react';
 import getVideoId from 'get-video-id';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
+import * as Yup from 'yup';
 
 export default function YouTubeURLForm({
   recordID,
@@ -18,21 +19,25 @@ export default function YouTubeURLForm({
     },
     recordID,
   });
+  const validationSchema = Yup.object().shape({
+    youtubeURL: Yup.string().matches(),
+  });
 
   const onSubmit = (data) => {
     const videoID = getVideoId(data.youtubeURL);
     if (videoID.id && videoID.service === 'youtube') {
+      const collectionWithVideos = collection.map((record) => {
+        if (
+          record.id === recordID &&
+          record.videos.includes(videoID.id) === false
+        ) {
+          record.videos.push(videoID.id);
+        }
+        return record;
+      });
+      onSetCollection(collectionWithVideos);
+    } else {
     }
-    const collectionWithVideos = collection.map((record) => {
-      if (
-        record.id === recordID &&
-        record.videos.includes(videoID.id) === false
-      ) {
-        record.videos.push(videoID.id);
-      }
-      return record;
-    });
-    onSetCollection(collectionWithVideos);
   };
 
   return (
@@ -45,6 +50,10 @@ export default function YouTubeURLForm({
         <InputURL
           {...register('youtubeURL', {
             required: 'This field is required!',
+            pattern: {
+              value: /^\S+youtube\S+$/,
+              message: "This doesn't seem to be a YouTube-URL.",
+            },
             minLength: {
               value: 11,
               message: 'A Video-ID has 11 characters, a URL is even longer.',
@@ -55,7 +64,7 @@ export default function YouTubeURLForm({
             },
           })}
           type="text"
-          placeholder="YouTube-URL or Video-ID"
+          placeholder="Enter YouTube-URL"
         />
         <Submit type="submit" value="add" />
         <ErrorMessage>{errors.youtubeURL?.message}</ErrorMessage>

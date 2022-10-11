@@ -86,8 +86,8 @@ const CollectionWrapper = styled.section`
   position: relative;
   display: flex;
   flex-direction: column;
-  margin: 0;
-  /* justify-content: center; */
+  margin: auto;
+  align-items: center;
 `;
 
 const Heading = styled.header`

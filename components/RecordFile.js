@@ -138,8 +138,8 @@ const Record = styled.li`
   gap: 0.5rem;
   margin: 1rem;
   padding: 1rem;
-  width: 95%;
-  min-width: 300px;
+  /* max-width: 95%; */
+  width: 300px;
   box-shadow: 0px 0px 30px 10px rgba(51, 51, 51, 0.1);
   border-radius: 5px;
   font-family: 'Open Sans', sans-serif;
@@ -167,6 +167,7 @@ const BookmarkIcon = styled.input`
 
 const TrackInformation = styled(RecordDetails)`
   position: relative;
+  min-width: 00px;
   margin-top: 2rem;
   font-size: 11px;
 `;
