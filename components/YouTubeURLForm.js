@@ -71,7 +71,7 @@ export default function YouTubeURLForm({
 const Form = styled.form`
   display: flex;
   gap: 0.7rem;
-  margin: 0.5rem 0;
+  margin-top: 0.5rem;
 `;
 
 const InputURL = styled.input`
