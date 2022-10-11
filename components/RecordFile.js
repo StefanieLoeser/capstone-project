@@ -102,21 +102,20 @@ export default function RecordFile({
             })}
           </TrackInformation>
         </TrackContainer>
-
-        <VideoContainer
-          showVideos={showVideos}
-          style={{ display: showVideos ? 'block' : 'none' }}
-        >
-          <YouTubeURLForm
-            recordID={record.id}
-            collection={collection}
-            onSetCollection={onSetCollection}
-          />
-          {musicVideos.map((video) => {
-            return <YoutubeEmbed key={video} embedId={video} />;
-          })}
-        </VideoContainer>
       </div>
+      <VideoContainer
+        showVideos={showVideos}
+        style={{ display: showVideos ? 'block' : 'none' }}
+      >
+        <YouTubeURLForm
+          recordID={record.id}
+          collection={collection}
+          onSetCollection={onSetCollection}
+        />
+        {musicVideos.map((video) => {
+          return <YoutubeEmbed key={video} embedId={video} />;
+        })}
+      </VideoContainer>
     </Record>
   );
 }
@@ -136,7 +135,7 @@ const Record = styled.li`
   position: relative;
   grid-template-columns: 25% 75%;
   gap: 0.5rem;
-  margin: 1rem;
+  margin: 1rem 0;
   padding: 1rem;
   /* max-width: 95%; */
   width: 300px;
@@ -203,5 +202,5 @@ const TrackContainer = styled.div`
 `;
 
 const VideoContainer = styled(TrackContainer)`
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
 `;

@@ -2,7 +2,6 @@ import React from 'react';
 import getVideoId from 'get-video-id';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import * as Yup from 'yup';
 
 export default function YouTubeURLForm({
   recordID,
@@ -19,9 +18,6 @@ export default function YouTubeURLForm({
     },
     recordID,
   });
-  const validationSchema = Yup.object().shape({
-    youtubeURL: Yup.string().matches(),
-  });
 
   const onSubmit = (data) => {
     const videoID = getVideoId(data.youtubeURL);
@@ -36,13 +32,12 @@ export default function YouTubeURLForm({
         return record;
       });
       onSetCollection(collectionWithVideos);
-    } else {
     }
   };
 
   return (
     <>
-      <form
+      <Form
         onSubmit={handleSubmit((data) =>
           onSubmit(data, recordID, collection, onSetCollection)
         )}
@@ -51,7 +46,7 @@ export default function YouTubeURLForm({
           {...register('youtubeURL', {
             required: 'This field is required!',
             pattern: {
-              value: /^\S+youtube\S+$/,
+              value: /^\S+youtube.\S+$/,
               message: "This doesn't seem to be a YouTube-URL.",
             },
             minLength: {
@@ -68,10 +63,27 @@ export default function YouTubeURLForm({
         />
         <Submit type="submit" value="add" />
         <ErrorMessage>{errors.youtubeURL?.message}</ErrorMessage>
-      </form>
+      </Form>
     </>
   );
 }
+
+const Form = styled.form`
+  display: flex;
+  gap: 0.7rem;
+  margin: 0.5rem 0;
+`;
+
+const InputURL = styled.input`
+  padding: 0.1rem 0.2rem;
+  border: none;
+  /* box-shadow: 0px 0px 5px 1px rgba(51, 51, 51, 0.3); */
+  border: 1px solid #c7c7c7;
+  border-radius: 2px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.6rem;
+  /* width: 200px; */
+`;
 
 const Submit = styled.input`
   background-color: red;
@@ -79,17 +91,6 @@ const Submit = styled.input`
   border: none;
   border-radius: 3px;
   padding: 0.2rem 0.4rem;
-  margin: 0 0.7rem 0.5rem;
-`;
-
-const InputURL = styled.input`
-  padding: 0.2rem;
-  border: none;
-  /* box-shadow: 0px 0px 5px 1px rgba(51, 51, 51, 0.3); */
-  border: 1px solid #c7c7c7;
-  border-radius: 2px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 0.6rem;
 `;
 
 const ErrorMessage = styled.p`

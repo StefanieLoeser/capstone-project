@@ -1,17 +1,22 @@
 import React from 'react';
+import styled from 'styled-components';
 
 const YoutubeEmbed = ({ embedId }) => (
-  <div className="video-responsive">
+  <VideoWrapper className="video-responsive">
     <iframe
-      width="210"
-      height="120"
+      width="265"
+      height="150"
       src={`https://www.youtube.com/embed/${embedId}`}
       frameBorder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowFullScreen
       title="Embedded youtube"
     />
-  </div>
+  </VideoWrapper>
 );
 
 export default YoutubeEmbed;
+
+const VideoWrapper = styled.div`
+  margin-top: 0.7rem;
+`;
