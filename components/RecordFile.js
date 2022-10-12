@@ -111,7 +111,15 @@ export default function RecordFile({
           onSetCollection={onSetCollection}
         />
         {musicVideos.map((video) => {
-          return <YoutubeEmbed key={video} embedId={video} />;
+          return (
+            <YoutubeEmbed
+              recordID={record.id}
+              key={video}
+              embedId={video}
+              collection={collection}
+              onSetCollection={onSetCollection}
+            />
+          );
         })}
       </VideoContainer>
     </Record>
@@ -192,7 +200,8 @@ const ButtonToggleVideos = styled(ButtonToggleTracks)`
 `;
 
 const TrackContainer = styled.div`
-  position: relative;
+  /* position: relative; */
+  width: 100%;
 `;
 
 const VideoContainer = styled(TrackContainer)``;
