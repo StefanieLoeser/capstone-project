@@ -52,7 +52,7 @@ export default function Home() {
                   height={30}
                 />
               </IconWrapperBag>
-              <NavLink>check what's in your bag</NavLink>
+              <NavLink>check what`&apos;`s in your bag</NavLink>
             </a>
           </Link>
         </NavWrapper>
