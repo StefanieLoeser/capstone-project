@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import Head from 'next/head';
 import RecordFile from '../components/RecordFile';
 import useLocalStorage from '../hooks/useLocalStorage';
-import { useEffect } from 'react';
 import Footer from '../components/Footer';
 
 export async function getServerSideProps({ query }) {
@@ -12,7 +11,6 @@ export async function getServerSideProps({ query }) {
 
   const sort = query.sort ? query.sort : 'added';
   const order = query.order ? query.order : 'desc';
-  // const page = query.page ? query.page : '1';
 
   const collectionItemsByFolderURL =
     'https://api.discogs.com/users/' +
@@ -23,10 +21,6 @@ export async function getServerSideProps({ query }) {
     sort +
     '&sort_order=' +
     order;
-  // +
-  // '&page=' +
-  // page +
-  // '&per_page=50';
 
   const init = {
     headers: {

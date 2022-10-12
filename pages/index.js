@@ -8,56 +8,44 @@ import arrowDown from '../public/assets/icon-arrow-down-50.png';
 
 export default function Home() {
   return (
-    <>
-      <LandingBody>
-        <NavWrapper>
-          <Link href="/collection">
-            <a>
-              <NavLink>browse your collection</NavLink>
-              <IconWrapperCollection>
-                <Image
-                  alt="to collection"
-                  src={collection}
-                  width={30}
-                  height={30}
-                />
-                <Image
-                  alt="to collection"
-                  src={arrowUp}
-                  width={40}
-                  height={40}
-                />
-              </IconWrapperCollection>
-            </a>
-          </Link>
-          <Slogan>
-            Get ready for <br />
-            your gig. <br />
-            Pack your <em>RecordBag</em>.
-          </Slogan>
-          <Link href="/recordbag">
-            <a>
-              <IconWrapperBag>
-                <Image
-                  alt="to recordbag"
-                  src={arrowDown}
-                  width={40}
-                  height={40}
-                />
+    <LandingBody>
+      <NavWrapper>
+        <Link href="/collection">
+          <a>
+            <NavLink>browse your collection</NavLink>
+            <IconWrapperCollection>
+              <Image
+                alt="to collection"
+                src={collection}
+                width={30}
+                height={30}
+              />
+              <Image alt="to collection" src={arrowUp} width={40} height={40} />
+            </IconWrapperCollection>
+          </a>
+        </Link>
+        <Slogan>
+          Get ready for <br />
+          your gig. <br />
+          Pack your <em>RecordBag</em>.
+        </Slogan>
+        <Link href="/recordbag">
+          <a>
+            <IconWrapperBag>
+              <Image
+                alt="to recordbag"
+                src={arrowDown}
+                width={40}
+                height={40}
+              />
 
-                <Image
-                  alt="to recordbag"
-                  src={trolley}
-                  width={40}
-                  height={30}
-                />
-              </IconWrapperBag>
-              <NavLink>check what&apos;s in your bag</NavLink>
-            </a>
-          </Link>
-        </NavWrapper>
-      </LandingBody>
-    </>
+              <Image alt="to recordbag" src={trolley} width={40} height={30} />
+            </IconWrapperBag>
+            <NavLink>check what&apos;s in your bag</NavLink>
+          </a>
+        </Link>
+      </NavWrapper>
+    </LandingBody>
   );
 }
 

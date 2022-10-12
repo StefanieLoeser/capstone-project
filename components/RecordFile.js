@@ -200,7 +200,6 @@ const ButtonToggleVideos = styled(ButtonToggleTracks)`
 `;
 
 const TrackContainer = styled.div`
-  /* position: relative; */
   width: 100%;
 `;
 
