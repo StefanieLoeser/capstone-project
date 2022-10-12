@@ -6,7 +6,6 @@ import Image from 'next/image';
 import iconOpenList from '../public/assets/icon_open_list.png';
 import iconCloseList from '../public/assets/icon_close_list.png';
 import iconShowVideos from '../public/assets/icon-video-player-red.png';
-import Bookmark from './Bookmark';
 
 export default function RecordFile({
   record,
@@ -47,7 +46,6 @@ export default function RecordFile({
               width={30}
               height={30}
             />
-            {/* {showTracks ? 'less' : 'more'} */}
           </Icon>
         </ButtonToggleTracks>
         <ButtonToggleVideos onClick={toggleVideos}>
@@ -113,7 +111,15 @@ export default function RecordFile({
           onSetCollection={onSetCollection}
         />
         {musicVideos.map((video) => {
-          return <YoutubeEmbed key={video} embedId={video} />;
+          return (
+            <YoutubeEmbed
+              recordID={record.id}
+              key={video}
+              embedId={video}
+              collection={collection}
+              onSetCollection={onSetCollection}
+            />
+          );
         })}
       </VideoContainer>
     </Record>
@@ -137,7 +143,6 @@ const Record = styled.li`
   gap: 0.5rem;
   margin: 1rem 0;
   padding: 1rem;
-  /* max-width: 95%; */
   width: 300px;
   box-shadow: 0px 0px 30px 10px rgba(51, 51, 51, 0.1);
   border-radius: 5px;
@@ -185,9 +190,6 @@ const ButtonToggleTracks = styled.button`
   border: none;
   border-radius: 50%;
   padding: 0.2rem;
-  /* width: 16px;
-  height: 16px; */
-  /* background-color: #dddddd; */
   background: none;
   color: #333333;
 `;
@@ -198,9 +200,7 @@ const ButtonToggleVideos = styled(ButtonToggleTracks)`
 `;
 
 const TrackContainer = styled.div`
-  position: relative;
+  width: 100%;
 `;
 
-const VideoContainer = styled(TrackContainer)`
-  /* margin-top: 2rem; */
-`;
+const VideoContainer = styled(TrackContainer)``;
