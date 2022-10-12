@@ -49,11 +49,12 @@ const VideoWrapper = styled.div`
 const RemoveVideo = styled.button`
   font-size: 1rem;
   border: none;
-  padding: 0.2rem 0.4rem;
+  padding: 0.5rem 0.5rem;
   border-radius: 50%;
   position: absolute;
   top: 0.5rem;
   left: 0.5rem;
   color: white;
   background: none;
+  cursor: pointer;
 `;
