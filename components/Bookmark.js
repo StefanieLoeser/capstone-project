@@ -30,7 +30,7 @@ const Bookmark = ({ checked, ...props }) => (
     <div checked={checked}>
       <Image
         alt={(props) => (props.isChecked ? 'visible' : 'hidden')}
-        src={(props) => (props.record.isChecked ? bookmarkSelected : bookmark)}
+        src={(props) => (props.isChecked ? bookmarkSelected : bookmark)}
         layout="responsive"
         width={24}
         height={24}
@@ -40,20 +40,3 @@ const Bookmark = ({ checked, ...props }) => (
 );
 
 export default Bookmark;
-
-// const StyledCheckbox = styled.div`
-//   display: inline-block;
-//   width: 16px;
-//   height: 16px;
-//   background: ${(props) => (props.checked ? 'salmon' : 'papayawhip')}
-//   border-radius: 3px;
-//   transition: all 150ms;
-
-//   ${HiddenCheckbox}:focus + & {
-//     box-shadow: 0 0 0 3px pink;
-//   }
-
-//   ${Icon} {
-//     visibility: ${(props) => (props.checked ? 'visible' : 'hidden')}
-//   }
-// `;

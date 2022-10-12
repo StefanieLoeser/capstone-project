@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import RecordFile from '../components/RecordFile';
 import useLocalStorage from '../hooks/useLocalStorage';
+import Footer from '../components/Footer';
 
 export default function RecordBag({ onToggleBookmark }) {
   const [collectionState, setCollectionState] = useLocalStorage('_collection');
@@ -31,6 +32,7 @@ export default function RecordBag({ onToggleBookmark }) {
               ))}
         </SelectionList>
       </SelectionWrapper>
+      <Footer />
     </>
   );
 }

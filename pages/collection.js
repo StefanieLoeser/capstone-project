@@ -3,6 +3,7 @@ import Head from 'next/head';
 import RecordFile from '../components/RecordFile';
 import useLocalStorage from '../hooks/useLocalStorage';
 import { useEffect } from 'react';
+import Footer from '../components/Footer';
 
 export async function getServerSideProps({ query }) {
   const userToken = process.env.DISCOGS_USER_TOKEN;
@@ -72,6 +73,7 @@ export default function Collection({ onToggleBookmark, myDiscogsCollection }) {
           ))}
         </CollectionList>
       </CollectionWrapper>
+      <Footer />
     </>
   );
 }
