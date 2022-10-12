@@ -3,6 +3,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import trolley from '../public/assets/icons8-01-trolley-sbts2018-outline/icon-trolley-58.png';
 import collection from '../public/assets/icons8-multiple-artist-collection-of-music-and-songs-from-different-distributors-tal-revivo-light/icon-collection-48.png';
+import arrowUp from '../public/assets/icons8-pfeil_-lang,-hoch-sf-ultralight-filled/icon-arrow-up-50.png';
+import arrowDown from '../public/assets/icon-arrow-down-50.png';
 
 export default function Home() {
   return (
@@ -10,31 +12,48 @@ export default function Home() {
       <LandingBody>
         <NavWrapper>
           <Link href="/collection">
-            <NavLink>
-              browse your collection
-              <Image
-                alt="to collection"
-                src={collection}
-                // layout="responsive"
-                width={80}
-                height={50}
-              />
-            </NavLink>
+            <a>
+              <NavLink>browse your collection</NavLink>
+              <IconWrapperCollection>
+                <Image
+                  alt="to collection"
+                  src={collection}
+                  width={30}
+                  height={30}
+                />
+                <Image
+                  alt="to collection"
+                  src={arrowUp}
+                  width={40}
+                  height={40}
+                />
+              </IconWrapperCollection>
+            </a>
           </Link>
           <Slogan>
-            Get ready for your gig. Pack your <em>RecordBag</em>.
+            Get ready for <br />
+            your gig. <br />
+            Pack your <em>RecordBag</em>.
           </Slogan>
           <Link href="/recordbag">
-            <NavLink>
-              <Image
-                alt="to recordbag"
-                src={trolley}
-                // layout="responsive"
-                width={80}
-                height={60}
-              />
-              check what's in your bag
-            </NavLink>
+            <a>
+              <IconWrapperBag>
+                <Image
+                  alt="to recordbag"
+                  src={arrowDown}
+                  width={40}
+                  height={40}
+                />
+
+                <Image
+                  alt="to recordbag"
+                  src={trolley}
+                  width={40}
+                  height={30}
+                />
+              </IconWrapperBag>
+              <NavLink>check what's in your bag</NavLink>
+            </a>
           </Link>
         </NavWrapper>
       </LandingBody>
@@ -48,7 +67,6 @@ const LandingBody = styled.section`
   align-items: center;
   justify-content: center;
   position: relative;
-  gap: 5rem;
   background-color: #333333;
   height: 100vh;
   width: 100vw;
@@ -59,22 +77,35 @@ const NavWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const IconWrapperCollection = styled.div`
+  display: grid;
   justify-content: center;
-  position: relative;
-  gap: 2rem;
-  /* top: -4rem; */
+  margin: 1rem;
+  gap: 1rem;
+`;
+
+const IconWrapperBag = styled.div`
+  display: grid;
+  justify-content: center;
+  margin: 1rem;
+  gap: 1rem;
 `;
 
 const Slogan = styled.h1`
   text-align: center;
   color: white;
   width: 60vw;
+  margin: 1rem;
 `;
 
-const NavLink = styled.a`
+const NavLink = styled.p`
   text-decoration: none;
+  text-align: center;
+  width: 5rem;
   color: white;
-  margin: 3rem;
+  margin: 1rem;
   :hover {
     color: hotpink;
     cursor: pointer;

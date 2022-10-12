@@ -43,7 +43,6 @@ const SelectionWrapper = styled.section`
   flex-direction: column;
   margin: 0;
   align-items: center;
-  /* justify-content: center; */
 `;
 
 const SelectionList = styled.ul`

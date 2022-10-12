@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 export default function Footer() {
@@ -11,14 +10,6 @@ export default function Footer() {
       <Navbar>
         <Link href="/collection" passHref>
           <StyledLinks active={'/collection' === currentRoute}>
-            {/* <Image
-              alt={props.isChecked ? 'visible' : 'hidden')}
-              src={(props) =>
-                props.record.isChecked ? bookmarkSelected : bookmark
-              }
-              width={24}
-              height={24}
-            /> */}
             Collection
           </StyledLinks>
         </Link>
@@ -37,6 +28,8 @@ const StyledLinks = styled.a`
   background-color: ${(props) => (props.active ? 'white' : '#333333')};
   cursor: pointer;
   text-decoration: none;
+  padding: 0.2rem;
+  border-radius: 3px;
 `;
 
 const Navbar = styled.nav`
