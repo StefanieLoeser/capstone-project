@@ -5,10 +5,12 @@ import trolley from '../public/assets/icons8-01-trolley-sbts2018-outline/icon-tr
 import collection from '../public/assets/icons8-multiple-artist-collection-of-music-and-songs-from-different-distributors-tal-revivo-light/icon-collection-48.png';
 import arrowUp from '../public/assets/icons8-pfeil_-lang,-hoch-sf-ultralight-filled/icon-arrow-up-50.png';
 import arrowDown from '../public/assets/icon-arrow-down-50.png';
+import Searchbar from '../components/Searchbar';
 
 export default function Home() {
   return (
     <LandingBody>
+      <Searchbar />
       <NavWrapper>
         <Link href="/collection">
           <a>

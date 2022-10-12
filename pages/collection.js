@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Head from 'next/head';
 import RecordFile from '../components/RecordFile';
 import useLocalStorage from '../hooks/useLocalStorage';
+import Searchbar from '../components/Searchbar';
 import Footer from '../components/Footer';
 
 export async function getServerSideProps({ query }) {
@@ -51,6 +52,7 @@ export default function Collection({ onToggleBookmark, myDiscogsCollection }) {
       </Head>
       <Heading>
         <h1>RecordCollection</h1>
+        <Searchbar />
       </Heading>
       <CollectionWrapper>
         <CollectionList>
@@ -89,7 +91,8 @@ const CollectionWrapper = styled.section`
 const Heading = styled.header`
   background-color: #333333;
   width: 100%;
-  height: 48px;
+  height: 60px;
+  /* height: 48px; */
   color: white;
   font-family: 'Open Sans', sans-serif;
   font-weight: bold;
