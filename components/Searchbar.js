@@ -9,8 +9,11 @@ export default function Searchbar({ collection, onSetCollection }) {
 
   function handleSubmit(event) {
     const searchTerm = event.target.searchRecord.value.trim();
-    setQuery(query);
+    setQuery(searchTerm);
     console.log(searchTerm);
+    const newResult = collection.filter((value) => {
+        return value.
+    })
   }
 
   return (
@@ -24,6 +27,7 @@ export default function Searchbar({ collection, onSetCollection }) {
           type="text"
           aria-label="search"
           placeholder="search for a record"
+          value={query}
         />
         <button
           className="searchSubmit"
