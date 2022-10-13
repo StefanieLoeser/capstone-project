@@ -4,22 +4,24 @@ import searchIcon from '../public/assets/icons8-suche.svg';
 import { useState } from 'react';
 
 export default function Searchbar({ collection }) {
-  const [results, setResults] = useState([]);
   const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
 
+  const search = (allRecords) => {
+    const filteredCollection = allRecords.filter(
+      (record) =>
+        record.basic_information.title.toLowerCase().includes(query) ||
+        record.basic_information.artists[0].name
+          .toLowerCase()
+          .includes(query) ||
+        record.basic_information.labels[0].name.toLowerCase().includes(query)
+    );
+    return setResults(filteredCollection);
+  };
+  console.log(results.length);
   function handleSubmit(event) {
     event.preventDefault();
-    const searchTerm = event.target.searchRecord.value.trim();
-    console.log(searchTerm);
-    // setQuery(searchTerm);
-    // const filteredCollection = collection.filter((query) => {
-    //   return query.toLowerCase().includes(searchTerm.toLowerCase());
-    // });
-    // if (searchTerm === '') {
-    //   setResults([]);
-    // } else {
-    //   setResults(filteredCollection);
-    // }
+    search(collection);
   }
 
   return (
@@ -33,12 +35,12 @@ export default function Searchbar({ collection }) {
           type="text"
           aria-label="search"
           placeholder="search for a record"
+          onChange={(e) => setQuery(e.target.value.toLowerCase())}
         />
         <button
           className="searchSubmit"
           aria-label="submit search"
           type="submit"
-          id="searchRecord"
         >
           {' '}
           <Image alt="search-button" src={searchIcon} width="12" height="12" />

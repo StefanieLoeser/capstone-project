@@ -25,6 +25,7 @@ export default function RecordFile({
       .then((response) => response.json())
       .then((data) => setTracklist(data.tracklist))
       .catch((error) => console.error(error));
+    console.log(tracklist);
   }
 
   const [showVideos, setShowVideos] = useState(false);
@@ -91,7 +92,7 @@ export default function RecordFile({
                 <Track key={track.position + track.title}>
                   {track.position}-
                   <strong>
-                    {track.artists ? `${track.artists[0].name} - ` : ''}
+                    {track.artists ? `${track.artists[0].name}  -` : ''}
                   </strong>
                   <em>{track.title}</em>{' '}
                   {track.duration ? `(${track.duration} min)` : ''}

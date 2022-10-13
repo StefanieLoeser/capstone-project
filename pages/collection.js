@@ -52,7 +52,7 @@ export default function Collection({ onToggleBookmark, myDiscogsCollection }) {
       </Head>
       <Heading>
         <HeaderWrapper>
-          <Searchbar />
+          <Searchbar collection={collectionState} />
           <h1>
             <em>collection</em>
           </h1>
