@@ -3,9 +3,8 @@ import Image from 'next/image';
 import searchIcon from '../public/assets/icons8-suche.svg';
 import { useState } from 'react';
 
-export default function Searchbar({ collection }) {
+export default function Searchbar({ collection, onSetResults }) {
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState([]);
 
   const search = (allRecords) => {
     const filteredCollection = allRecords.filter(
@@ -16,9 +15,8 @@ export default function Searchbar({ collection }) {
           .includes(query) ||
         record.basic_information.labels[0].name.toLowerCase().includes(query)
     );
-    return setResults(filteredCollection);
+    return onSetResults(filteredCollection);
   };
-  console.log(results.length);
   function handleSubmit(event) {
     event.preventDefault();
     search(collection);

@@ -25,7 +25,6 @@ export default function RecordFile({
       .then((response) => response.json())
       .then((data) => setTracklist(data.tracklist))
       .catch((error) => console.error(error));
-    console.log(tracklist);
   }
 
   const [showVideos, setShowVideos] = useState(false);

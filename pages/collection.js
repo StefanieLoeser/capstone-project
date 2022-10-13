@@ -4,6 +4,7 @@ import RecordFile from '../components/RecordFile';
 import useLocalStorage from '../hooks/useLocalStorage';
 import Searchbar from '../components/Searchbar';
 import Footer from '../components/Footer';
+import { useState } from 'react';
 
 export async function getServerSideProps({ query }) {
   const userToken = process.env.DISCOGS_USER_TOKEN;
@@ -44,6 +45,7 @@ export default function Collection({ onToggleBookmark, myDiscogsCollection }) {
     '_collection',
     myDiscogsCollection
   );
+  const [results, setResults] = useState([]);
 
   return (
     <>
@@ -52,13 +54,14 @@ export default function Collection({ onToggleBookmark, myDiscogsCollection }) {
       </Head>
       <Heading>
         <HeaderWrapper>
-          <Searchbar collection={collectionState} />
+          <Searchbar collection={collectionState} onSetResults={setResults} />
           <h1>
             <em>collection</em>
           </h1>
         </HeaderWrapper>
       </Heading>
       <CollectionWrapper>
+        {/* {results && (results.length !== 0) ?  */}
         <CollectionList>
           {collectionState.map((file) => (
             <RecordFile

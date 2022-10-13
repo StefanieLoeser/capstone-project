@@ -1,6 +1,11 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import recordIcon from '../public/assets/icon-record.png';
+import recordIconFilled from '../public/assets/icon-record.png';
+import trolley from '../public/assets/icons8-01-trolley-sbts2018-outline/icon-trolley-58.png';
+import collection from '../public/assets/icons8-multiple-artist-collection-of-music-and-songs-from-different-distributors-tal-revivo-light/icon-collection-48.png';
 
 export default function Footer() {
   const router = useRouter();
