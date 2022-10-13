@@ -4,31 +4,26 @@ import Image from 'next/image';
 import searchIcon from '../public/assets/icons8-suche.svg';
 
 export default function Searchbar({ recordID, collection, onSetCollection }) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      youtubeURL: '',
-    },
-    recordID,
-  });
+  function handleSubmit() {
+    // const query = event.target.searchRecord.value.trim();
+    console.log('query');
+  }
 
   return (
     <SearchFormWrapper>
       <SearchForm>
         <input
           className="searchInput"
+          id="searchRecord"
+          name="searchRecord"
+          maxLength="100"
           type="text"
           aria-label="search"
           placeholder="search for a record"
         />
         <button
           className="searchSubmit"
-          onSubmit={handleSubmit((data) =>
-            onSubmit(data, recordID, collection, onSetCollection)
-          )}
+          onSubmit={handleSubmit}
           aria-label="submit search"
           type="submit"
         >
@@ -36,9 +31,16 @@ export default function Searchbar({ recordID, collection, onSetCollection }) {
           <Image alt="search-button" src={searchIcon} width="12" height="12" />
         </button>
       </SearchForm>
+      {/* <ErrorMessage>{errors.youtubeURL?.message}</ErrorMessage> */}
     </SearchFormWrapper>
   );
 }
+
+const ErrorMessage = styled.p`
+  font-style: italic;
+  width: 70%;
+  color: white;
+`;
 
 const SearchFormWrapper = styled.div`
   background: transparent;
@@ -68,7 +70,7 @@ const SearchForm = styled.form`
     padding: 0.25rem 0.25rem;
     flex-grow: 1;
     outline: 0;
-    z-index: 0;
+    z-index: 2;
     position: absolute;
     top: 0;
     bottom: 0;
