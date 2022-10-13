@@ -8,7 +8,7 @@ export default function Searchbar({ collection }) {
   const [query, setQuery] = useState('');
 
   function handleSubmit(event) {
-    event.prefentDefault();
+    event.preventDefault();
     const searchTerm = event.target.searchRecord.value.trim();
     console.log(searchTerm);
     // setQuery(searchTerm);
