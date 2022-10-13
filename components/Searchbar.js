@@ -8,22 +8,23 @@ export default function Searchbar({ collection }) {
   const [query, setQuery] = useState('');
 
   function handleSubmit(event) {
+    event.prefentDefault();
     const searchTerm = event.target.searchRecord.value.trim();
-    setQuery(searchTerm);
     console.log(searchTerm);
-    const filteredCollection = collection.filter((query) => {
-      return query.toLowerCase().includes(searchTerm.toLowerCase());
-    });
-    if (searchTerm === '') {
-      setResults([]);
-    } else {
-      setResults(filteredCollection);
-    }
+    // setQuery(searchTerm);
+    // const filteredCollection = collection.filter((query) => {
+    //   return query.toLowerCase().includes(searchTerm.toLowerCase());
+    // });
+    // if (searchTerm === '') {
+    //   setResults([]);
+    // } else {
+    //   setResults(filteredCollection);
+    // }
   }
 
   return (
     <SearchFormWrapper>
-      <SearchForm>
+      <SearchForm onSubmit={handleSubmit}>
         <input
           className="searchInput"
           id="searchRecord"
@@ -35,9 +36,9 @@ export default function Searchbar({ collection }) {
         />
         <button
           className="searchSubmit"
-          onSubmit={handleSubmit}
           aria-label="submit search"
           type="submit"
+          id="searchRecord"
         >
           {' '}
           <Image alt="search-button" src={searchIcon} width="12" height="12" />
@@ -56,7 +57,7 @@ const ErrorMessage = styled.p`
 
 const SearchFormWrapper = styled.div`
   background: transparent;
-  width: 30vw;
+  width: 45vw;
   padding: 0.3em;
   position: relative;
 `;

@@ -24,6 +24,8 @@ export default function Footer() {
 }
 
 const StyledLinks = styled.a`
+  /* color: white;
+  text-decoration: ${(props) => (props.active ? 'line-through' : 'none')}; */
   color: ${(props) => (props.active ? '#333333' : 'white')};
   background-color: ${(props) => (props.active ? 'white' : '#333333')};
   cursor: pointer;
