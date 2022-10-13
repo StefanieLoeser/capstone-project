@@ -10,10 +10,12 @@ export default function RecordBag({ onToggleBookmark }) {
   return (
     <>
       <Heading>
-        <Searchbar />
-        <h1>
-          <em>RecordBag</em>
-        </h1>
+        <HeaderWrapper>
+          <Searchbar />
+          <h1>
+            <em>recordbag</em>
+          </h1>
+        </HeaderWrapper>
       </Heading>
       <Text>Your selected records:</Text>
       <SelectionWrapper>
@@ -40,6 +42,13 @@ export default function RecordBag({ onToggleBookmark }) {
     </>
   );
 }
+
+const HeaderWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  width: 300px;
+`;
 
 const SelectionWrapper = styled.section`
   position: relative;

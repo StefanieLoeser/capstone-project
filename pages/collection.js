@@ -102,8 +102,7 @@ const HeaderWrapper = styled.div`
 const Heading = styled.header`
   background-color: #333333;
   width: 100%;
-  height: 60px;
-  /* height: 48px; */
+  height: 48px;
   color: white;
   font-family: 'Open Sans', sans-serif;
   font-weight: bold;
