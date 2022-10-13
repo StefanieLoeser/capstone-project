@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import RecordFile from '../components/RecordFile';
 import useLocalStorage from '../hooks/useLocalStorage';
+import Searchbar from '../components/Searchbar';
 import Footer from '../components/Footer';
 
 export default function RecordBag({ onToggleBookmark }) {
@@ -9,7 +10,10 @@ export default function RecordBag({ onToggleBookmark }) {
   return (
     <>
       <Heading>
-        <h1>RecordBag</h1>
+        <Searchbar />
+        <h1>
+          <em>RecordBag</em>
+        </h1>
       </Heading>
       <Text>Your selected records:</Text>
       <SelectionWrapper>

@@ -51,8 +51,12 @@ export default function Collection({ onToggleBookmark, myDiscogsCollection }) {
         <title>RecordBag</title>
       </Head>
       <Heading>
-        <h1>RecordCollection</h1>
-        <Searchbar />
+        <HeaderWrapper>
+          <Searchbar />
+          <h1>
+            <em>collection</em>
+          </h1>
+        </HeaderWrapper>
       </Heading>
       <CollectionWrapper>
         <CollectionList>
@@ -86,6 +90,13 @@ const CollectionWrapper = styled.section`
   flex-direction: column;
   margin: auto;
   align-items: center;
+`;
+
+const HeaderWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  width: 300px;
 `;
 
 const Heading = styled.header`
