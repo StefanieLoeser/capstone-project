@@ -3,7 +3,7 @@ import Image from 'next/image';
 import searchIcon from '../public/assets/icons8-suche.svg';
 import { useState } from 'react';
 
-export default function Searchbar({ collection, onSetCollection }) {
+export default function Searchbar({ collection }) {
   const [results, setResults] = useState([]);
   const [query, setQuery] = useState('');
 
@@ -11,9 +11,14 @@ export default function Searchbar({ collection, onSetCollection }) {
     const searchTerm = event.target.searchRecord.value.trim();
     setQuery(searchTerm);
     console.log(searchTerm);
-    const newResult = collection.filter((value) => {
-        return value.
-    })
+    const filteredCollection = collection.filter((query) => {
+      return query.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+    if (searchTerm === '') {
+      setResults([]);
+    } else {
+      setResults(filteredCollection);
+    }
   }
 
   return (
@@ -27,7 +32,6 @@ export default function Searchbar({ collection, onSetCollection }) {
           type="text"
           aria-label="search"
           placeholder="search for a record"
-          value={query}
         />
         <button
           className="searchSubmit"
