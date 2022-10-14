@@ -7,29 +7,46 @@ import bookmarkSelected from '../public/assets/icon-record-selected.png';
 // tried to adapt from this example:
 //https://codesandbox.io/s/building-a-checkbox-component-with-react-and-styled-components-forked-zhddwm?file=/src/Checkbox.js:540-905
 
-const Bookmark = ({ checked, ...props }) => (
-  <CheckboxContainer>
-    <HiddenCheckbox checked={checked} {...props} />
-    <StyledCheckbox checked={checked}>
+const Bookmark = ({
+  toggleBookmark,
+  onChange,
+  id,
+  collection,
+  onSetCollection,
+  checked,
+  ...props
+}) => (
+  <>
+    <HiddenCheckbox
+      checked={checked}
+      onChange={() => toggleBookmark(id, collection, onSetCollection)}
+      {...props}
+    />
+    <StyledCheckbox
+      onChange={() => toggleBookmark(id, collection, onSetCollection)}
+      checked={checked}
+    >
       <Image
-        alt={(props) => (props.record.isChecked ? 'visible' : 'hidden')}
-        src={(props) => (props.record.isChecked ? bookmarkSelected : bookmark)}
+        alt={checked ? 'selected' : 'not selected'}
+        src={checked ? bookmarkSelected : bookmark}
         width={16}
         height={16}
       />
     </StyledCheckbox>
-  </CheckboxContainer>
+  </>
 );
 
 export default Bookmark;
 
 const CheckboxContainer = styled.div`
-  display: inline-block;
+  /* display: inline-block; */
   vertical-align: middle;
 `;
 
 const StyledCheckbox = styled.div`
-  display: flex;
+  display: inline;
+  position: absolute;
+  right: 0.5rem;
   justify-content: center;
   align-items: center;
   width: 24px;
@@ -42,10 +59,10 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   clip: rect(0 0 0 0);
   clippath: inset(50%);
   height: 1px;
+  width: 1px;
   margin: -1px;
   overflow: hidden;
   padding: 0;
   position: absolute;
   white-space: nowrap;
-  width: 1px;
 `;
