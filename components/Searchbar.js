@@ -26,35 +26,17 @@ export default function Searchbar({ collection, onSetResults }) {
     }
   }
 
-  const search = (allRecords) => {
-    const filteredCollection = allRecords.filter(
-      (record) =>
-        record.basic_information.title.toLowerCase().includes(query) ||
-        record.basic_information.artists[0].name
-          .toLowerCase()
-          .includes(query) ||
-        record.basic_information.labels[0].name.toLowerCase().includes(query)
-    );
-    return onSetResults(filteredCollection);
-  };
-  function handleSubmit(event) {
-    event.preventDefault();
-    search(collection);
-  }
-
   return (
     <SearchFormWrapper>
       <SearchForm>
-        {/* <SearchForm onSubmit={handleSubmit}> */}
         <input
           className="searchInput"
-          id="search1"
-          name="search1"
+          id="search"
+          name="search"
           maxLength="100"
           type="text"
           aria-label="search"
           placeholder="search for a record"
-          // onChange={(e) => setQuery(e.target.value.toLowerCase())}
           onChange={handleChange}
         />
         <button
@@ -66,7 +48,6 @@ export default function Searchbar({ collection, onSetResults }) {
           <Image alt="search-button" src={searchIcon} width="12" height="12" />
         </button>
       </SearchForm>
-      {/* <ErrorMessage>{errors.youtubeURL?.message}</ErrorMessage> */}
     </SearchFormWrapper>
   );
 }

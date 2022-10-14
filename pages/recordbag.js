@@ -13,7 +13,7 @@ export default function RecordBag({ onToggleBookmark }) {
         <HeaderWrapper>
           <Searchbar />
           <h1>
-            <em>recordbag</em>
+            <em>rekordbag</em>
           </h1>
         </HeaderWrapper>
       </Heading>
