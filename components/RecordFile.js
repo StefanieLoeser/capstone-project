@@ -6,6 +6,7 @@ import Image from 'next/image';
 import iconOpenList from '../public/assets/icon_open_list.png';
 import iconCloseList from '../public/assets/icon_close_list.png';
 import iconShowVideos from '../public/assets/icon-video-player-red.png';
+import Bookmark from './Bookmark';
 
 export default function RecordFile({
   record,
@@ -162,7 +163,7 @@ const RecordDetails = styled.ul`
   width: 85%;
 `;
 
-const BookmarkIcon = styled.input`
+const BookmarkIcon = styled(Bookmark)`
   position: absolute;
   top: 1rem;
   right: 1rem;
