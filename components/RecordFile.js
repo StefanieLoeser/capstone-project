@@ -6,7 +6,6 @@ import Image from 'next/image';
 import iconOpenList from '../public/assets/icon_open_list.png';
 import iconCloseList from '../public/assets/icon_close_list.png';
 import iconShowVideos from '../public/assets/icon-video-player-red.png';
-import Bookmark from '../components/Bookmark';
 
 export default function RecordFile({
   record,
