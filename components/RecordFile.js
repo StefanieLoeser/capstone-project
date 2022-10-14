@@ -68,6 +68,10 @@ export default function RecordFile({
           onChange={() =>
             onToggleBookmark(record.id, collection, onSetCollection)
           }
+          id={record.id}
+          collection={collection}
+          onSetCollection={onSetCollection}
+          toggleBookmark={onToggleBookmark}
         />
         <RecordDetails>
           <li key={`#${record.id}`}>
