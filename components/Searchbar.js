@@ -27,8 +27,8 @@ export default function Searchbar({ collection, onSetResults }) {
       <SearchForm onSubmit={handleSubmit}>
         <input
           className="searchInput"
-          id="searchRecord"
-          name="searchRecord"
+          id="search1"
+          name="search1"
           maxLength="100"
           type="text"
           aria-label="search"

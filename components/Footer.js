@@ -15,12 +15,21 @@ export default function Footer() {
       <Navbar>
         <Link href="/collection" passHref>
           <StyledLinks active={'/collection' === currentRoute}>
-            Collection
+            <IconWrapperCollection>
+              <Image
+                alt="to collection"
+                src={collection}
+                width={30}
+                height={30}
+              />
+            </IconWrapperCollection>
           </StyledLinks>
         </Link>
         <Link href="/recordbag" passHref>
           <StyledLinks active={'/recordbag' === currentRoute}>
-            RecordBag
+            <IconWrapperBag>
+              <Image alt="to recordbag" src={trolley} width={35} height={25} />
+            </IconWrapperBag>
           </StyledLinks>
         </Link>
       </Navbar>
@@ -28,15 +37,32 @@ export default function Footer() {
   );
 }
 
+const IconWrapperBag = styled.div`
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  margin: 0.1rem;
+  gap: 1rem;
+`;
+
+const IconWrapperCollection = styled.div`
+  display: grid;
+  justify-content: center;
+
+  margin: 0.1rem;
+  gap: 1rem;
+`;
+
 const StyledLinks = styled.a`
+  background-color: ${(props) => (props.active ? 'gray' : '#333333')};
   /* color: white;
   text-decoration: ${(props) => (props.active ? 'line-through' : 'none')}; */
-  color: ${(props) => (props.active ? '#333333' : 'white')};
-  background-color: ${(props) => (props.active ? 'white' : '#333333')};
+  /* color: ${(props) => (props.active ? '#333333' : 'white')};
+  background-color: ${(props) => (props.active ? 'white' : '#333333')}; */
   cursor: pointer;
   text-decoration: none;
   padding: 0.2rem;
-  border-radius: 3px;
+  border-radius: 50%;
 `;
 
 const Navbar = styled.nav`
