@@ -6,6 +6,26 @@ import { useState } from 'react';
 export default function Searchbar({ collection, onSetResults }) {
   const [query, setQuery] = useState('');
 
+  function handleChange(e) {
+    setQuery(e.target.value.toLowerCase());
+    if (query === '') {
+      onSetResults(collection);
+    } else {
+      onSetResults(
+        collection.filter(
+          (record) =>
+            record.basic_information.title.toLowerCase().includes(query) ||
+            record.basic_information.artists[0].name
+              .toLowerCase()
+              .includes(query) ||
+            record.basic_information.labels[0].name
+              .toLowerCase()
+              .includes(query)
+        )
+      );
+    }
+  }
+
   const search = (allRecords) => {
     const filteredCollection = allRecords.filter(
       (record) =>
@@ -24,7 +44,8 @@ export default function Searchbar({ collection, onSetResults }) {
 
   return (
     <SearchFormWrapper>
-      <SearchForm onSubmit={handleSubmit}>
+      <SearchForm>
+        {/* <SearchForm onSubmit={handleSubmit}> */}
         <input
           className="searchInput"
           id="search1"
@@ -33,7 +54,8 @@ export default function Searchbar({ collection, onSetResults }) {
           type="text"
           aria-label="search"
           placeholder="search for a record"
-          onChange={(e) => setQuery(e.target.value.toLowerCase())}
+          // onChange={(e) => setQuery(e.target.value.toLowerCase())}
+          onChange={handleChange}
         />
         <button
           className="searchSubmit"

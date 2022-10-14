@@ -61,19 +61,38 @@ export default function Collection({ onToggleBookmark, myDiscogsCollection }) {
         </HeaderWrapper>
       </Heading>
       <CollectionWrapper>
-        {/* {results && (results.length !== 0) ?  */}
         <CollectionList>
-          {collectionState.map((file) => (
-            <RecordFile
-              key={file.id}
-              record={file}
-              collection={collectionState}
-              onSetCollection={setCollectionState}
-              onToggleBookmark={() =>
-                onToggleBookmark(file.id, collectionState, setCollectionState)
-              }
-            />
-          ))}
+          {results.length !== 0
+            ? results.map((file) => (
+                <RecordFile
+                  key={file.id}
+                  record={file}
+                  collection={collectionState}
+                  onSetCollection={setCollectionState}
+                  onToggleBookmark={() =>
+                    onToggleBookmark(
+                      file.id,
+                      collectionState,
+                      setCollectionState
+                    )
+                  }
+                />
+              ))
+            : collectionState.map((file) => (
+                <RecordFile
+                  key={file.id}
+                  record={file}
+                  collection={collectionState}
+                  onSetCollection={setCollectionState}
+                  onToggleBookmark={() =>
+                    onToggleBookmark(
+                      file.id,
+                      collectionState,
+                      setCollectionState
+                    )
+                  }
+                />
+              ))}
         </CollectionList>
       </CollectionWrapper>
       <Footer />
