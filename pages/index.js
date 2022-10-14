@@ -95,7 +95,7 @@ const NavLink = styled.p`
   color: white;
   margin: 1rem;
   :hover {
-    color: hotpink;
+    color: #ff7f7f;
     cursor: pointer;
   }
 `;

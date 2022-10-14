@@ -6,6 +6,12 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
     }
+
+    :root {
+  --clr-primary: #ee6352;
+  --clr-body: #333;
+  --clr-bg: #ddd;
+}
 `;
 
 export default GlobalStyle;

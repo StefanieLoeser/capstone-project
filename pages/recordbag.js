@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import RecordFile from '../components/RecordFile';
 import useLocalStorage from '../hooks/useLocalStorage';
+import Searchbar from '../components/Searchbar';
 import Footer from '../components/Footer';
 
 export default function RecordBag({ onToggleBookmark }) {
@@ -9,7 +10,12 @@ export default function RecordBag({ onToggleBookmark }) {
   return (
     <>
       <Heading>
-        <h1>RecordBag</h1>
+        <HeaderWrapper>
+          <Searchbar />
+          <h1>
+            <em>rekordbag</em>
+          </h1>
+        </HeaderWrapper>
       </Heading>
       <Text>Your selected records:</Text>
       <SelectionWrapper>
@@ -36,6 +42,13 @@ export default function RecordBag({ onToggleBookmark }) {
     </>
   );
 }
+
+const HeaderWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  width: 300px;
+`;
 
 const SelectionWrapper = styled.section`
   position: relative;

@@ -14,13 +14,13 @@ export default function YouTubeURLForm({
     formState: { errors },
   } = useForm({
     defaultValues: {
-      youtubeURL: '',
+      youtubeLink: '',
     },
     recordID,
   });
 
   const onSubmit = (data) => {
-    const videoID = getVideoId(data.youtubeURL);
+    const videoID = getVideoId(data.youtubeLink);
     if (videoID.id && videoID.service === 'youtube') {
       const collectionWithVideos = collection.map((record) => {
         if (
@@ -43,7 +43,7 @@ export default function YouTubeURLForm({
         )}
       >
         <InputURL
-          {...register('youtubeURL', {
+          {...register('youtubeLink', {
             required: 'This field is required!',
             pattern: {
               value: /^\S+youtube.\S+$/,
@@ -61,8 +61,8 @@ export default function YouTubeURLForm({
           type="text"
           placeholder="Enter YouTube-URL"
         />
+        <ErrorMessage>{errors.youtubeLink?.message}</ErrorMessage>
         <Submit type="submit" value="add" />
-        <ErrorMessage>{errors.youtubeURL?.message}</ErrorMessage>
       </Form>
     </>
   );
@@ -95,6 +95,6 @@ const Submit = styled.input`
 
 const ErrorMessage = styled.p`
   font-style: italic;
-  width: 70%;
+  width: 50%;
   color: grey;
 `;

@@ -57,7 +57,6 @@ export default function RecordFile({
               width={24}
               height={24}
             />
-            {/* {showVideos ? '-' : '+'} */}
           </Icon>
         </ButtonToggleVideos>
       </CoverAndButtons>
@@ -91,7 +90,7 @@ export default function RecordFile({
                 <Track key={track.position + track.title}>
                   {track.position}-
                   <strong>
-                    {track.artists ? `${track.artists[0].name} - ` : ''}
+                    {track.artists ? `${track.artists[0].name}  -` : ''}
                   </strong>
                   <em>{track.title}</em>{' '}
                   {track.duration ? `(${track.duration} min)` : ''}

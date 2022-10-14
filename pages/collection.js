@@ -2,7 +2,9 @@ import styled from 'styled-components';
 import Head from 'next/head';
 import RecordFile from '../components/RecordFile';
 import useLocalStorage from '../hooks/useLocalStorage';
+import Searchbar from '../components/Searchbar';
 import Footer from '../components/Footer';
+import { useState } from 'react';
 
 export async function getServerSideProps({ query }) {
   const userToken = process.env.DISCOGS_USER_TOKEN;
@@ -43,6 +45,7 @@ export default function Collection({ onToggleBookmark, myDiscogsCollection }) {
     '_collection',
     myDiscogsCollection
   );
+  const [results, setResults] = useState([]);
 
   return (
     <>
@@ -50,21 +53,46 @@ export default function Collection({ onToggleBookmark, myDiscogsCollection }) {
         <title>RecordBag</title>
       </Head>
       <Heading>
-        <h1>RecordCollection</h1>
+        <HeaderWrapper>
+          <Searchbar collection={collectionState} onSetResults={setResults} />
+          <h1>
+            <em>collection</em>
+          </h1>
+        </HeaderWrapper>
       </Heading>
       <CollectionWrapper>
         <CollectionList>
-          {collectionState.map((file) => (
-            <RecordFile
-              key={file.id}
-              record={file}
-              collection={collectionState}
-              onSetCollection={setCollectionState}
-              onToggleBookmark={() =>
-                onToggleBookmark(file.id, collectionState, setCollectionState)
-              }
-            />
-          ))}
+          {results.length !== 0
+            ? results.map((file) => (
+                <RecordFile
+                  key={file.id}
+                  record={file}
+                  collection={collectionState}
+                  onSetCollection={setCollectionState}
+                  onToggleBookmark={() =>
+                    onToggleBookmark(
+                      file.id,
+                      collectionState,
+                      setCollectionState
+                    )
+                  }
+                />
+              ))
+            : collectionState.map((file) => (
+                <RecordFile
+                  key={file.id}
+                  record={file}
+                  collection={collectionState}
+                  onSetCollection={setCollectionState}
+                  onToggleBookmark={() =>
+                    onToggleBookmark(
+                      file.id,
+                      collectionState,
+                      setCollectionState
+                    )
+                  }
+                />
+              ))}
         </CollectionList>
       </CollectionWrapper>
       <Footer />
@@ -84,6 +112,13 @@ const CollectionWrapper = styled.section`
   flex-direction: column;
   margin: auto;
   align-items: center;
+`;
+
+const HeaderWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  width: 300px;
 `;
 
 const Heading = styled.header`
