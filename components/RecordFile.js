@@ -77,9 +77,6 @@ export default function RecordFile({
           <Bookmark
             type="checkbox"
             checked={record.isChecked}
-            // onChange={() =>
-            //   onToggleBookmark(record.id, collection, onSetCollection)
-            // }
             id={record.id}
             collection={collection}
             onSetCollection={onSetCollection}
@@ -182,8 +179,8 @@ const RecordDetails = styled.ul`
 
 const BookmarkWrapper = styled.div`
   position: absolute;
-  top: 1rem;
-  right: 0;
+  top: 0.9rem;
+  right: 2rem;
 `;
 
 const TrackInformation = styled(RecordDetails)`
@@ -203,7 +200,7 @@ const ButtonToggleTracks = styled.button`
   justify-content: center;
   align-items: center;
   top: 2.3rem;
-  right: 0.7rem;
+  right: 0.6rem;
   border: none;
   border-radius: 50%;
   padding: 0.2rem;

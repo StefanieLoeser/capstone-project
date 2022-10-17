@@ -93,9 +93,12 @@ const Slogan = styled.h1`
 const NavLink = styled.p`
   text-decoration: none;
   text-align: center;
+  border: 1px;
   width: 5rem;
   color: white;
   margin: 1rem;
+  border: 1px solid #ffffff;
+  border-radius: 6px;
   :hover {
     color: #ff7f7f;
     cursor: pointer;
