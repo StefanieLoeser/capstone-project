@@ -11,7 +11,6 @@ function Bookmark({
   onSetCollection,
   checked,
 }) {
-  console.log(checked);
   return (
     <>
       <StyledBookmark

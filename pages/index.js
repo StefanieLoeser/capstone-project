@@ -28,7 +28,7 @@ export default function Home() {
           Get ready <br />
           for your gig. <br />
           Pack your <br />
-          <em>RecordBag</em>.
+          <em>RekordBag</em>.
         </Slogan>
         <Link href="/recordbag">
           <a>
@@ -97,8 +97,6 @@ const NavLink = styled.p`
   width: 5rem;
   color: white;
   margin: 1rem;
-  border: 1px solid #ffffff;
-  border-radius: 6px;
   :hover {
     color: #ff7f7f;
     cursor: pointer;
