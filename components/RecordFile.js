@@ -52,7 +52,7 @@ export default function RecordFile({
         </ButtonToggleTracks>
         <ButtonToggleVideos onClick={toggleVideos}>
           <Icon showVideos={showVideos}>
-            {record.videos.length === 0 ? (
+            {record.videos?.length === 0 ? (
               <Image
                 alt={showVideos ? 'hide videos' : 'show videos'}
                 src={showVideos ? iconCloseList : iconVideoSection}
@@ -73,17 +73,19 @@ export default function RecordFile({
         </ButtonToggleVideos>
       </CoverAndButtons>
       <div>
-        <BookmarkIcon
-          type="checkbox"
-          checked={record.isChecked}
-          onChange={() =>
-            onToggleBookmark(record.id, collection, onSetCollection)
-          }
-          id={record.id}
-          collection={collection}
-          onSetCollection={onSetCollection}
-          toggleBookmark={onToggleBookmark}
-        />
+        <BookmarkWrapper>
+          <Bookmark
+            type="checkbox"
+            checked={record.isChecked}
+            // onChange={() =>
+            //   onToggleBookmark(record.id, collection, onSetCollection)
+            // }
+            id={record.id}
+            collection={collection}
+            onSetCollection={onSetCollection}
+            toggleBookmark={onToggleBookmark}
+          />
+        </BookmarkWrapper>
         <RecordDetails>
           <li key={`#${record.id}`}>
             <strong>{record.basic_information?.artists[0].name}</strong>
@@ -178,10 +180,10 @@ const RecordDetails = styled.ul`
   width: 85%;
 `;
 
-const BookmarkIcon = styled(Bookmark)`
+const BookmarkWrapper = styled.div`
   position: absolute;
   top: 1rem;
-  right: 1rem;
+  right: 0;
 `;
 
 const TrackInformation = styled(RecordDetails)`

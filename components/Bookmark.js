@@ -7,34 +7,36 @@ import bookmarkSelected from '../public/assets/icon-record-selected.png';
 // tried to adapt from this example:
 //https://codesandbox.io/s/building-a-checkbox-component-with-react-and-styled-components-forked-zhddwm?file=/src/Checkbox.js:540-905
 
-const Bookmark = ({
+function Bookmark({
   toggleBookmark,
-  onChange,
   id,
   collection,
   onSetCollection,
   checked,
   ...props
-}) => (
-  <>
-    <HiddenCheckbox
-      checked={checked}
-      onChange={() => toggleBookmark(id, collection, onSetCollection)}
-      {...props}
-    />
-    <StyledCheckbox
-      onChange={() => toggleBookmark(id, collection, onSetCollection)}
-      checked={checked}
-    >
-      <Image
-        alt={checked ? 'selected' : 'not selected'}
-        src={checked ? bookmarkSelected : bookmark}
-        width={16}
-        height={16}
+}) {
+  console.log(checked);
+  return (
+    <>
+      <HiddenCheckbox
+        checked={checked}
+        onChange={() => toggleBookmark(id, collection, onSetCollection)}
+        {...props}
       />
-    </StyledCheckbox>
-  </>
-);
+      <StyledCheckbox
+        onChange={() => toggleBookmark(id, collection, onSetCollection)}
+        checked={checked}
+      >
+        <Image
+          alt={checked ? 'selected' : 'not selected'}
+          src={checked ? bookmark : bookmarkSelected}
+          width={16}
+          height={16}
+        />
+      </StyledCheckbox>
+    </>
+  );
+}
 
 export default Bookmark;
 
@@ -49,6 +51,10 @@ const StyledCheckbox = styled.div`
   right: 0.5rem;
   justify-content: center;
   align-items: center;
+  /* background-image: ${(props) =>
+    props.checked
+      ? "url('../public/assets/icon-record-selected.png')"
+      : "url('../public/assets/icon-record.png')"}; */
   width: 24px;
   height: 24px;
   /* transition: all 150ms; */
