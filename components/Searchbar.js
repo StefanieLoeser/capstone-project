@@ -26,14 +26,19 @@ export default function Searchbar({ collection, onSetResults }) {
     }
   }
 
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+
   return (
     <SearchFormWrapper>
-      <SearchForm>
+      <SearchForm onSubmit={handleSubmit}>
         <input
           className="searchInput"
-          id="search"
-          name="search"
+          id="searchForRecord"
+          name="searchForRecord"
           maxLength="100"
+          autoComplete="false"
           type="text"
           aria-label="search"
           placeholder="search for a record"

@@ -25,9 +25,10 @@ export default function Home() {
           </a>
         </Link>
         <Slogan>
-          Get ready for <br />
-          your gig. <br />
-          Pack your <em>RecordBag</em>.
+          Get ready <br />
+          for your gig. <br />
+          Pack your <br />
+          <em>RekordBag</em>.
         </Slogan>
         <Link href="/recordbag">
           <a>
@@ -65,6 +66,7 @@ const NavWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: 'Source Serif Pro', serif; ;
 `;
 
 const IconWrapperCollection = styled.div`
@@ -91,6 +93,7 @@ const Slogan = styled.h1`
 const NavLink = styled.p`
   text-decoration: none;
   text-align: center;
+  border: 1px;
   width: 5rem;
   color: white;
   margin: 1rem;

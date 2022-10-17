@@ -6,6 +6,8 @@ import Image from 'next/image';
 import iconOpenList from '../public/assets/icon_open_list.png';
 import iconCloseList from '../public/assets/icon_close_list.png';
 import iconShowVideos from '../public/assets/icon-video-player-red.png';
+import iconVideoSection from '../public/assets/icon-video-player-grey.png';
+import Bookmark from './Bookmark';
 
 export default function RecordFile({
   record,
@@ -50,24 +52,37 @@ export default function RecordFile({
         </ButtonToggleTracks>
         <ButtonToggleVideos onClick={toggleVideos}>
           <Icon showVideos={showVideos}>
-            <Image
-              alt={showVideos ? 'hide videos' : 'show videos'}
-              src={showVideos ? iconCloseList : iconShowVideos}
-              layout="responsive"
-              width={24}
-              height={24}
-            />
+            {record.videos?.length === 0 ? (
+              <Image
+                alt={showVideos ? 'hide videos' : 'show videos'}
+                src={showVideos ? iconCloseList : iconVideoSection}
+                layout="responsive"
+                width={24}
+                height={24}
+              />
+            ) : (
+              <Image
+                alt={showVideos ? 'hide videos' : 'show videos'}
+                src={showVideos ? iconCloseList : iconShowVideos}
+                layout="responsive"
+                width={24}
+                height={24}
+              />
+            )}
           </Icon>
         </ButtonToggleVideos>
       </CoverAndButtons>
       <div>
-        <BookmarkIcon
-          type="checkbox"
-          checked={record.isChecked}
-          onChange={() =>
-            onToggleBookmark(record.id, collection, onSetCollection)
-          }
-        />
+        <BookmarkWrapper>
+          <Bookmark
+            type="checkbox"
+            checked={record.isChecked}
+            id={record.id}
+            collection={collection}
+            onSetCollection={onSetCollection}
+            toggleBookmark={onToggleBookmark}
+          />
+        </BookmarkWrapper>
         <RecordDetails>
           <li key={`#${record.id}`}>
             <strong>{record.basic_information?.artists[0].name}</strong>
@@ -162,10 +177,10 @@ const RecordDetails = styled.ul`
   width: 85%;
 `;
 
-const BookmarkIcon = styled.input`
+const BookmarkWrapper = styled.div`
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.9rem;
+  right: 2rem;
 `;
 
 const TrackInformation = styled(RecordDetails)`
@@ -185,7 +200,7 @@ const ButtonToggleTracks = styled.button`
   justify-content: center;
   align-items: center;
   top: 2.3rem;
-  right: 0.7rem;
+  right: 0.6rem;
   border: none;
   border-radius: 50%;
   padding: 0.2rem;

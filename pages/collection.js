@@ -50,7 +50,7 @@ export default function Collection({ onToggleBookmark, myDiscogsCollection }) {
   return (
     <>
       <Head>
-        <title>RecordBag</title>
+        <title>RekordBag</title>
       </Head>
       <Heading>
         <HeaderWrapper>

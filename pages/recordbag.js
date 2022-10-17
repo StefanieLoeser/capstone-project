@@ -71,7 +71,7 @@ const Text = styled.p`
   text-align: center;
   position: relative;
   top: 3rem;
-  margin: 1rem;
+  margin-top: 1rem;
 `;
 
 const Heading = styled.header`
