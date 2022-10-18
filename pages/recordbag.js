@@ -45,7 +45,7 @@ export default function RecordBag({ onToggleBookmark, results, onSetResults }) {
                   />
                 ))
             : collectionState
-                .filter((record) => record.isChecked)
+                ?.filter((record) => record.isChecked)
                 .map((file) => (
                   <RecordFile
                     key={file.id}
