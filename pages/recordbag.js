@@ -21,14 +21,14 @@ export default function RecordBag({ onToggleBookmark, results, onSetResults }) {
           </h1>
         </HeaderWrapper>
       </Heading>
-      {numberSelected === 0 ? (
+      {numberSelected !== 0 ? (
         <Text>
-          Your bag is empty. <br />
-          Go back digging in you collection.
+          You have selected <strong>{numberSelected}</strong> records:
         </Text>
       ) : (
         <Text>
-          You have selected <strong>{numberSelected}</strong> records:
+          Your bag is empty. <br />
+          Go back digging in you collection.
         </Text>
       )}
       <SelectionWrapper>
