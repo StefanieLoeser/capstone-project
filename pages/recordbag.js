@@ -21,7 +21,7 @@ export default function RecordBag({ onToggleBookmark, results, onSetResults }) {
           </h1>
         </HeaderWrapper>
       </Heading>
-      {numberSelected !== 0 ? (
+      {numberSelected && numberSelected !== 0 ? (
         <Text>
           You have selected <strong>{numberSelected}</strong> records:
         </Text>
