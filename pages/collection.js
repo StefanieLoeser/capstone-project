@@ -4,7 +4,6 @@ import RecordFile from '../components/RecordFile';
 import useLocalStorage from '../hooks/useLocalStorage';
 import Searchbar from '../components/Searchbar';
 import Footer from '../components/Footer';
-import { useState } from 'react';
 
 export async function getServerSideProps({ query }) {
   const userToken = process.env.DISCOGS_USER_TOKEN;

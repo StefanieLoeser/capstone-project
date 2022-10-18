@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 import Image from 'next/image';
-import trolley from '../public/assets/icons8-01-trolley-sbts2018-outline/icon-trolley-58.png';
-import collection from '../public/assets/icons8-multiple-artist-collection-of-music-and-songs-from-different-distributors-tal-revivo-light/icon-collection-48.png';
-import arrowUp from '../public/assets/icons8-pfeil_-lang,-hoch-sf-ultralight-filled/icon-arrow-up-50.png';
+import trolley from '../public/assets/icon-trolley-58.png';
+import collection from '../public/assets/icon-collection-48.png';
+import arrowUp from '../public/assets/icon-arrow-up-50.png';
 import arrowDown from '../public/assets/icon-arrow-down-50.png';
 
 export default function Home() {

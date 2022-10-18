@@ -2,10 +2,8 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import recordIcon from '../public/assets/icon-record.png';
-import recordIconFilled from '../public/assets/icon-record.png';
-import trolley from '../public/assets/icons8-01-trolley-sbts2018-outline/icon-trolley-58.png';
-import collection from '../public/assets/icons8-multiple-artist-collection-of-music-and-songs-from-different-distributors-tal-revivo-light/icon-collection-48.png';
+import trolley from '../public/assets/icon-trolley-58.png';
+import collection from '../public/assets/icon-collection-48.png';
 
 export default function Footer() {
   const router = useRouter();
@@ -55,10 +53,6 @@ const IconWrapperCollection = styled.div`
 
 const StyledLinks = styled.a`
   background-color: ${(props) => (props.active ? 'gray' : '#333333')};
-  /* color: white;
-  text-decoration: ${(props) => (props.active ? 'line-through' : 'none')}; */
-  /* color: ${(props) => (props.active ? '#333333' : 'white')};
-  background-color: ${(props) => (props.active ? 'white' : '#333333')}; */
   cursor: pointer;
   text-decoration: none;
   padding: 0.2rem;
