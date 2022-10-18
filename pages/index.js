@@ -53,6 +53,7 @@ export default function Home() {
 const LandingBody = styled.section`
   display: flex;
   flex-direction: column;
+  text-decoration: none;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -93,12 +94,16 @@ const Slogan = styled.h1`
 const NavLink = styled.p`
   text-decoration: none;
   text-align: center;
-  border: 1px;
-  width: 5rem;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  width: 5.5rem;
   color: white;
+  padding: 0.5rem;
   margin: 1rem;
   :hover {
-    color: #ff7f7f;
+    color: white;
     cursor: pointer;
+    background-color: #636262;
+    border: 1px solid #636262;
   }
 `;
