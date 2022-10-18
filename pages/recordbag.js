@@ -21,9 +21,16 @@ export default function RecordBag({ onToggleBookmark, results, onSetResults }) {
           </h1>
         </HeaderWrapper>
       </Heading>
-      <Text>
-        You have selected <strong>{numberSelected}</strong> records:
-      </Text>
+      {numberSelected === 0 ? (
+        <Text>
+          Your bag is empty. <br />
+          Go back digging in you collection.
+        </Text>
+      ) : (
+        <Text>
+          You have selected <strong>{numberSelected}</strong> records:
+        </Text>
+      )}
       <SelectionWrapper>
         <SelectionList>
           {results?.length !== 0
@@ -89,7 +96,6 @@ const SelectionList = styled.ul`
 
 const Text = styled.p`
   font-family: 'Open Sans', sans-serif;
-  /* font-weight: bold; */
   font-size: 0.9rem;
   text-align: center;
   position: relative;
