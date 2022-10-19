@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 import Image from 'next/image';
-import trolley from '../public/assets/icons8-01-trolley-sbts2018-outline/icon-trolley-58.png';
-import collection from '../public/assets/icons8-multiple-artist-collection-of-music-and-songs-from-different-distributors-tal-revivo-light/icon-collection-48.png';
-import arrowUp from '../public/assets/icons8-pfeil_-lang,-hoch-sf-ultralight-filled/icon-arrow-up-50.png';
+import trolley from '../public/assets/icon-trolley-58.png';
+import collection from '../public/assets/icon-collection-48.png';
+import arrowUp from '../public/assets/icon-arrow-up-50.png';
 import arrowDown from '../public/assets/icon-arrow-down-50.png';
 
 export default function Home() {
@@ -53,6 +53,7 @@ export default function Home() {
 const LandingBody = styled.section`
   display: flex;
   flex-direction: column;
+  text-decoration: none;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -93,12 +94,16 @@ const Slogan = styled.h1`
 const NavLink = styled.p`
   text-decoration: none;
   text-align: center;
-  border: 1px;
-  width: 5rem;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  width: 5.5rem;
   color: white;
+  padding: 0.5rem;
   margin: 1rem;
   :hover {
-    color: #ff7f7f;
+    color: white;
     cursor: pointer;
+    background-color: #636262;
+    border: 1px solid #636262;
   }
 `;

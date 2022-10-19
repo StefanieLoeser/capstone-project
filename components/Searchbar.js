@@ -57,12 +57,6 @@ export default function Searchbar({ collection, onSetResults }) {
   );
 }
 
-const ErrorMessage = styled.p`
-  font-style: italic;
-  width: 70%;
-  color: white;
-`;
-
 const SearchFormWrapper = styled.div`
   background: transparent;
   width: 45vw;
