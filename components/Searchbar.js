@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Image from 'next/image';
 import searchIcon from '../public/assets/icons8-suche.svg';
+import clearSearchIcon from '../public/assets/icons-close-white-30.png';
 import { useState } from 'react';
 
 export default function Searchbar({ collection, onSetResults }) {
@@ -30,6 +31,11 @@ export default function Searchbar({ collection, onSetResults }) {
     e.preventDefault();
   }
 
+  function handleClearForm() {
+    setQuery('');
+    onSetResults(collection);
+  }
+
   return (
     <SearchFormWrapper>
       <SearchForm onSubmit={handleSubmit}>
@@ -42,16 +48,39 @@ export default function Searchbar({ collection, onSetResults }) {
           type="text"
           aria-label="search"
           placeholder="search for a record"
+          value={query}
           onChange={handleChange}
         />
-        <button
-          className="searchSubmit"
-          aria-label="submit search"
-          type="submit"
-        >
-          {' '}
-          <Image alt="search-button" src={searchIcon} width="12" height="12" />
-        </button>
+        {query.length !== 0 ? (
+          <button
+            className="searchSubmit"
+            aria-label="clear search"
+            type="submit"
+            onClick={handleClearForm}
+          >
+            {' '}
+            <Image
+              alt="search-button"
+              src={clearSearchIcon}
+              width="12"
+              height="12"
+            />
+          </button>
+        ) : (
+          <button
+            className="searchSubmit"
+            aria-label="submit search"
+            type="submit"
+          >
+            {' '}
+            <Image
+              alt="search-button"
+              src={searchIcon}
+              width="12"
+              height="12"
+            />
+          </button>
+        )}
       </SearchForm>
     </SearchFormWrapper>
   );
