@@ -10,6 +10,7 @@ export default function YouTubeURLForm({
 }) {
   const {
     register,
+    resetField,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -32,6 +33,7 @@ export default function YouTubeURLForm({
         return record;
       });
       onSetCollection(collectionWithVideos);
+      resetField('youtubeVideoUrl');
     }
   };
 
