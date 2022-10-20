@@ -4,7 +4,7 @@
 
 ## RekordBag 
 
-This app was developed as a Capstone Project for the Web Development Bootcamp at neuefische (07-10/2022). It enables vinyl DJs to prepare a selection of records from their collection for their upcoming gig digitally instead of spending hours in front of their reccord shelve. 
+This app was developed as a Capstone Project for the Web Development Bootcamp at neuefische (07-10/2022). It enables vinyl DJs to digitally prepare a selection of records from their collection for an upcoming gig instead of spending hours in front of their reccord shelve. 
 
 
 ### About 
@@ -24,6 +24,7 @@ https://user-images.githubusercontent.com/104068626/196183640-1897d780-8638-45a6
 - install all dependencies via `$ npm install`
 - Run app in development mode via `$ npm run dev`
 - visit on: http://localhost:3000/
+
 
 ### Techstack
 - NextJS
