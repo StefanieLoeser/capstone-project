@@ -44,26 +44,28 @@ export default function YouTubeURLForm({
           onSubmit(data, recordID, collection, onSetCollection)
         )}
       >
-        <InputURL
-          {...register('youtubeVideoUrl', {
-            required: 'This field is required!',
-            pattern: {
-              value: /^\S+youtube.\S+$/,
-              message: "This doesn't seem to be a YouTube-URL.",
-            },
-            minLength: {
-              value: 11,
-              message: 'A Video-ID has 11 characters, a URL is even longer.',
-            },
-            maxLength: {
-              value: 200,
-              message: 'Your URL is too long!',
-            },
-          })}
-          type="text"
-          placeholder="Enter YouTube-URL"
-        />
-        <ErrorMessage>{errors.youtubeVideoUrl?.message}</ErrorMessage>
+        <InputAndErrorMessageWrapper>
+          <InputURL
+            {...register('youtubeVideoUrl', {
+              required: 'This field is required!',
+              pattern: {
+                value: /^\S+youtu.\S+$/,
+                message: "This doesn't seem to be a YouTube-URL.",
+              },
+              minLength: {
+                value: 11,
+                message: 'A Video-ID has 11 characters, a URL is even longer.',
+              },
+              maxLength: {
+                value: 200,
+                message: 'Your URL is too long!',
+              },
+            })}
+            type="text"
+            placeholder="Enter YouTube-URL"
+          />
+          <ErrorMessage>{errors.youtubeVideoUrl?.message}</ErrorMessage>
+        </InputAndErrorMessageWrapper>
         <Submit type="submit" value="add" />
       </Form>
     </>
@@ -72,8 +74,13 @@ export default function YouTubeURLForm({
 
 const Form = styled.form`
   display: flex;
-  gap: 0.7rem;
-  margin-top: 0.5rem;
+  margin-top: 0.6rem;
+`;
+
+const InputAndErrorMessageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0;
 `;
 
 const InputURL = styled.input`
@@ -86,15 +93,19 @@ const InputURL = styled.input`
 `;
 
 const Submit = styled.input`
+  font-size: 0.6rem;
   background-color: red;
   color: white;
   border: none;
-  border-radius: 3px;
+  border-radius: 8px;
   padding: 0.2rem 0.4rem;
+  margin-left: 0.7rem;
+  align-self: flex-start;
 `;
 
 const ErrorMessage = styled.p`
   font-style: italic;
-  width: 50%;
   color: grey;
+  margin-top: 0.3rem;
+  font-size: 0.6rem;
 `;
